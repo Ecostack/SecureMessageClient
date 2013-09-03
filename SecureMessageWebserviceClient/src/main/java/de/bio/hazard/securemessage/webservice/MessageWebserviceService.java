@@ -42,25 +42,19 @@ public class MessageWebserviceService
         super(__getWsdlLocation(), MESSAGEWEBSERVICESERVICE_QNAME);
     }
 
-    public MessageWebserviceService(WebServiceFeature... features) {
-        super(__getWsdlLocation(), MESSAGEWEBSERVICESERVICE_QNAME, features);
-    }
+
 
     public MessageWebserviceService(URL wsdlLocation) {
         super(wsdlLocation, MESSAGEWEBSERVICESERVICE_QNAME);
     }
 
-    public MessageWebserviceService(URL wsdlLocation, WebServiceFeature... features) {
-        super(wsdlLocation, MESSAGEWEBSERVICESERVICE_QNAME, features);
-    }
+
 
     public MessageWebserviceService(URL wsdlLocation, QName serviceName) {
         super(wsdlLocation, serviceName);
     }
 
-    public MessageWebserviceService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
-        super(wsdlLocation, serviceName, features);
-    }
+
 
     /**
      * 
