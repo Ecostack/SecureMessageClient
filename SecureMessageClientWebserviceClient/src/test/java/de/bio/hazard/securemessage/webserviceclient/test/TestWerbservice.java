@@ -3,9 +3,9 @@ package de.bio.hazard.securemessage.webserviceclient.test;
 import java.net.URL;
 
 import junit.framework.TestCase;
-import de.bio.hazard.securemessage.webservice.MessageWebservice;
-import de.bio.hazard.securemessage.webservice.MessageWebserviceDTO;
-import de.bio.hazard.securemessage.webservice.MessageWebserviceService;
+import de.bio.hazard.securemessage.webservice.message.MessageWebservice;
+import de.bio.hazard.securemessage.webservice.message.MessageWebserviceDTO;
+import de.bio.hazard.securemessage.webservice.message.MessageWebserviceService;
 
 public class TestWerbservice extends TestCase {
 

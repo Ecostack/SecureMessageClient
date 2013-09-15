@@ -1,5 +1,5 @@
 
-package de.bio.hazard.securemessage.webservice;
+package de.bio.hazard.securemessage.webservice.message;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -28,8 +28,8 @@ public interface MessageWebservice {
      * @param arg0
      */
     @WebMethod
-    @RequestWrapper(localName = "addMessage", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.AddMessage")
-    @ResponseWrapper(localName = "addMessageResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.AddMessageResponse")
+    @RequestWrapper(localName = "addMessage", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.message.AddMessage")
+    @ResponseWrapper(localName = "addMessageResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.message.AddMessageResponse")
     @Action(input = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessageRequest", output = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessageResponse")
     public void addMessage(
         @WebParam(name = "arg0", targetNamespace = "")

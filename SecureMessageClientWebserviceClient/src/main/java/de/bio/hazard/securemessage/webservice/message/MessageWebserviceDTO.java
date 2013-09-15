@@ -1,5 +1,5 @@
 
-package de.bio.hazard.securemessage.webservice;
+package de.bio.hazard.securemessage.webservice.message;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
