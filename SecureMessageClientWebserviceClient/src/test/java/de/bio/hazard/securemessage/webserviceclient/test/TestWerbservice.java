@@ -1,8 +1,11 @@
 package de.bio.hazard.securemessage.webserviceclient.test;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import junit.framework.TestCase;
+import de.bio.hazard.securemessage.tecframework.encryption.facade.helper.EncryptionObjectModifier;
+import de.bio.hazard.securemessage.tecframework.encryption.symmetric.SymmetricKeygen;
 import de.bio.hazard.securemessage.webservice.authentication.AuthenticationWebservice;
 import de.bio.hazard.securemessage.webservice.authentication.AuthenticationWebserviceService;
 import de.bio.hazard.securemessage.webservice.authentication.NewUserWebserviceDTO;
@@ -36,13 +39,7 @@ public class TestWerbservice extends TestCase {
 
 	public void testBasisInfo() {
 		try {
-			BasisInfoWebserviceService lcEndpointService = new BasisInfoWebserviceService(
-					new URL("http://localhost:8080/basisInfoWebservice"));
-
-			BasisInfoWebservice lcEndpoint = lcEndpointService
-					.getBasisInfoWebservicePort();
-
-			ServerPublicKeyDTO lcSPKDTO = lcEndpoint.getServerPublicKey();
+			ServerPublicKeyDTO lcSPKDTO = getServerPublicKey();
 
 			System.err.println("SeverPublicKey length: "
 					+ lcSPKDTO.getServerPublicKey());
@@ -50,6 +47,18 @@ public class TestWerbservice extends TestCase {
 			e.printStackTrace();
 			assertTrue(false);
 		}
+	}
+
+	private ServerPublicKeyDTO getServerPublicKey()
+		throws MalformedURLException {
+	    BasisInfoWebserviceService lcEndpointService = new BasisInfoWebserviceService(
+	    		new URL("http://localhost:8080/basisInfoWebservice"));
+
+	    BasisInfoWebservice lcEndpoint = lcEndpointService
+	    		.getBasisInfoWebservicePort();
+
+	    ServerPublicKeyDTO lcSPKDTO = lcEndpoint.getServerPublicKey();
+	    return lcSPKDTO;
 	}
 	
 	public void testAuthNewUserFail() {
@@ -80,16 +89,24 @@ public class TestWerbservice extends TestCase {
 
 			AuthenticationWebservice lcEndpoint = lcEndpointService
 					.getAuthenticationWebservicePort();
-
+			
+			SymmetricKeygen lcSymmetricKeygen = new SymmetricKeygen();
+			
+			EncryptionObjectModifier encryptionObjectModifier=new EncryptionObjectModifier();
+			
+			byte[] lcSymKey= lcSymmetricKeygen.getKey(128);
+			byte[] lcSPKDTO = getServerPublicKey().getServerPublicKey();
+			
+			
 			NewUserWebserviceDTO lcNewUserWebserviceDTO = new NewUserWebserviceDTO();
-			lcNewUserWebserviceDTO.setEmail("HalloCorrect");
-			lcNewUserWebserviceDTO.setUsername("hansCorrect");
-			lcNewUserWebserviceDTO.setMobilenumber("1234Correct");
-			lcNewUserWebserviceDTO.setName("MustermannCorrect");
-			lcNewUserWebserviceDTO.setPrename("MaxCorrect");
-			lcNewUserWebserviceDTO.setPassword("MeinPasswortCorrect");
-			lcNewUserWebserviceDTO.setPublicKeyForMessaging("my public keyCorrect".getBytes());
-
+			lcNewUserWebserviceDTO.setSymEncryptionKey(encryptionObjectModifier.asymmetricEncrypt(lcSymKey, lcSPKDTO, false));
+			lcNewUserWebserviceDTO.setEmail(encryptionObjectModifier.symmetricEncrypt("HalloCorrect", lcSymKey));
+			lcNewUserWebserviceDTO.setUsername(encryptionObjectModifier.symmetricEncrypt("hansCorrect", lcSymKey));
+			lcNewUserWebserviceDTO.setMobilenumber(encryptionObjectModifier.symmetricEncrypt("1234Correct", lcSymKey));
+			lcNewUserWebserviceDTO.setName(encryptionObjectModifier.symmetricEncrypt("MustermannCorrect", lcSymKey));
+			lcNewUserWebserviceDTO.setPrename(encryptionObjectModifier.symmetricEncrypt("MaxCorrect", lcSymKey));
+			lcNewUserWebserviceDTO.setPassword(encryptionObjectModifier.symmetricEncrypt("MeinPasswortCorrect", lcSymKey));
+			lcNewUserWebserviceDTO.setPublicKeyForMessaging(encryptionObjectModifier.symmetricEncrypt("my public keyCorrect", lcSymKey));
 
 			lcEndpoint.addNewUser(lcNewUserWebserviceDTO);
 		} catch (Exception e) {

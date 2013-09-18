@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="symEncryptionKey" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
+ *         &lt;element name="symEncryptionKey" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,21 +31,26 @@ import javax.xml.bind.annotation.XmlType;
     "symEncryptionKey"
 })
 @XmlSeeAlso({
+    AuthenticationStepTwoDTO.class,
+    NewUserWebserviceDTO.class,
+    AuthenticationStepOneReturnDTO.class,
     NewDeviceWebserviceDTO.class,
-    NewUserWebserviceDTO.class
+    AuthenticationStepOneDTO.class,
+    AuthenticationStepTwoReturnDTO.class
 })
 public class AbstractDTO {
 
-    protected byte[] symEncryptionKey;
+    protected String symEncryptionKey;
 
     /**
      * Gets the value of the symEncryptionKey property.
      * 
      * @return
      *     possible object is
-     *     byte[]
+     *     {@link String }
+     *     
      */
-    public byte[] getSymEncryptionKey() {
+    public String getSymEncryptionKey() {
         return symEncryptionKey;
     }
 
@@ -54,9 +59,10 @@ public class AbstractDTO {
      * 
      * @param value
      *     allowed object is
-     *     byte[]
+     *     {@link String }
+     *     
      */
-    public void setSymEncryptionKey(byte[] value) {
+    public void setSymEncryptionKey(String value) {
         this.symEncryptionKey = value;
     }
 

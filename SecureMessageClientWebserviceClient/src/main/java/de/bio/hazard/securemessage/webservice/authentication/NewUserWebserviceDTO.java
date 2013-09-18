@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="prename" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="publicKeyForMessaging" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
+ *         &lt;element name="publicKeyForMessaging" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
@@ -50,7 +50,7 @@ public class NewUserWebserviceDTO
     protected String name;
     protected String password;
     protected String prename;
-    protected byte[] publicKeyForMessaging;
+    protected String publicKeyForMessaging;
     protected String username;
 
     /**
@@ -178,9 +178,10 @@ public class NewUserWebserviceDTO
      * 
      * @return
      *     possible object is
-     *     byte[]
+     *     {@link String }
+     *     
      */
-    public byte[] getPublicKeyForMessaging() {
+    public String getPublicKeyForMessaging() {
         return publicKeyForMessaging;
     }
 
@@ -189,9 +190,10 @@ public class NewUserWebserviceDTO
      * 
      * @param value
      *     allowed object is
-     *     byte[]
+     *     {@link String }
+     *     
      */
-    public void setPublicKeyForMessaging(byte[] value) {
+    public void setPublicKeyForMessaging(String value) {
         this.publicKeyForMessaging = value;
     }
 

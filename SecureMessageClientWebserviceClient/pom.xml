@@ -9,6 +9,16 @@
 	</parent>
 
 	<artifactId>SecureMessageWebserviceClient</artifactId>
+	
+	<dependencies>
+
+		<dependency>
+			<groupId>de.bio-hazard</groupId>
+			<artifactId>SecureMessageTecFramework</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<plugins>
