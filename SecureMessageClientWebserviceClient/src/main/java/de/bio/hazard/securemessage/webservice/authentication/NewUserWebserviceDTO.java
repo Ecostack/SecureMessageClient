@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="newUserWebserviceDTO">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{http://webservice.securemessage.hazard.bio.de/}abstractDTO">
  *       &lt;sequence>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="mobilenumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -22,10 +22,9 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="prename" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="publicKeyForMessaging" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
- *         &lt;element name="symEncryptionKey" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
  *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -40,10 +39,11 @@ import javax.xml.bind.annotation.XmlType;
     "password",
     "prename",
     "publicKeyForMessaging",
-    "symEncryptionKey",
     "username"
 })
-public class NewUserWebserviceDTO {
+public class NewUserWebserviceDTO
+    extends AbstractDTO
+{
 
     protected String email;
     protected String mobilenumber;
@@ -51,7 +51,6 @@ public class NewUserWebserviceDTO {
     protected String password;
     protected String prename;
     protected byte[] publicKeyForMessaging;
-    protected byte[] symEncryptionKey;
     protected String username;
 
     /**
@@ -194,28 +193,6 @@ public class NewUserWebserviceDTO {
      */
     public void setPublicKeyForMessaging(byte[] value) {
         this.publicKeyForMessaging = value;
-    }
-
-    /**
-     * Gets the value of the symEncryptionKey property.
-     * 
-     * @return
-     *     possible object is
-     *     byte[]
-     */
-    public byte[] getSymEncryptionKey() {
-        return symEncryptionKey;
-    }
-
-    /**
-     * Sets the value of the symEncryptionKey property.
-     * 
-     * @param value
-     *     allowed object is
-     *     byte[]
-     */
-    public void setSymEncryptionKey(byte[] value) {
-        this.symEncryptionKey = value;
     }
 
     /**

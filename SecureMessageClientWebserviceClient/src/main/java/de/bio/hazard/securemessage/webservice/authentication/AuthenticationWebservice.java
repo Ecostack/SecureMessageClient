@@ -35,4 +35,16 @@ public interface AuthenticationWebservice {
         @WebParam(name = "arg0", targetNamespace = "")
         NewUserWebserviceDTO arg0);
 
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "addNewDevice", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewDevice")
+    @ResponseWrapper(localName = "addNewDeviceResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewDeviceResponse")
+    @Action(input = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewDeviceRequest", output = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewDeviceResponse")
+    public void addNewDevice(
+        @WebParam(name = "arg0", targetNamespace = "")
+        NewDeviceWebserviceDTO arg0);
+
 }
