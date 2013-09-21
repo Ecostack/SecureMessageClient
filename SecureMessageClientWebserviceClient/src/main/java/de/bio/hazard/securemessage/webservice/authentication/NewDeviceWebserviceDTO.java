@@ -41,7 +41,7 @@ public class NewDeviceWebserviceDTO
 
     protected String devicename;
     protected String password;
-    protected byte[] publicKeyForDevice;
+    protected String publicKeyForDevice;
     protected String username;
 
     /**
@@ -99,7 +99,7 @@ public class NewDeviceWebserviceDTO
      *     possible object is
      *     byte[]
      */
-    public byte[] getPublicKeyForDevice() {
+    public String getPublicKeyForDevice() {
         return publicKeyForDevice;
     }
 
@@ -110,7 +110,7 @@ public class NewDeviceWebserviceDTO
      *     allowed object is
      *     byte[]
      */
-    public void setPublicKeyForDevice(byte[] value) {
+    public void setPublicKeyForDevice(String value) {
         this.publicKeyForDevice = value;
     }
 
