@@ -8,28 +8,63 @@ import org.springframework.stereotype.Service;
 
 import de.bio.hazard.securemessage.client.servicefacade.AuthenticationServiceFacade;
 import de.bio.hazard.securemessage.client.servicefacade.helper.AuthenticationKeyHelper;
+import de.bio.hazard.securemessage.client.servicefacade.helper.NewDeviceKeyHelper;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepOne;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepOneReturn;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepTwo;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepTwoReturn;
+import de.bio.hazard.securemessage.client.servicefacade.model.authentication.NewDeviceWebservice;
+import de.bio.hazard.securemessage.client.servicefacade.model.authentication.NewUserWebservice;
 import de.bio.hazard.securemessage.tecframework.data.validation.DateUtils;
+import de.bio.hazard.securemessage.tecframework.encryption.facade.helper.EncryptionObjectModifier;
 import de.bio.hazard.securemessage.tecframework.exception.AuthenticationExceptionBiohazard;
+import de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceDTO;
+import de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceReturnDTO;
 
 @Service
 public class AuthenticationService {
 
 	@Autowired
-	AuthenticationServiceFacade authenticationServiceFacade;
+	private AuthenticationServiceFacade authenticationServiceFacade;
 
-	public String authenticateMe() throws AuthenticationExceptionBiohazard {
+	@Autowired
+	private BasisInfoService basisInfoService;
+
+	@Autowired
+	private EncryptionObjectModifier encryptionObjectModifier;
+
+	public void addNewDevice(NewDeviceWebservice pNewDeviceWebservice,
+			NewDeviceKeyHelper pKeyHelper) {
+//		NewDeviceWebservice lcDeviceWebservice = new NewDeviceWebservice();
+//		lcDeviceWebservice.setDevicename(pDevicename);
+//		lcDeviceWebservice.setUsername(pUsername);
+//		lcDeviceWebservice.setPassword(pPassword);
+//		lcDeviceWebservice.setPublicKeyForDevice(encryptionObjectModifier
+//				.encodeBase64(pDevicePublicKey));
+
+		authenticationServiceFacade
+				.addNewDevice(pNewDeviceWebservice, pKeyHelper);
+
+	}
+
+	public void addNewUser(NewUserWebservice pNewUserWebservice) {
+//
+//		authenticationServiceFacade
+//				.addNewUser(pNewUserWebservice);
+
+	}
+
+	public String authenticateAndObtainAuthToken(String pDeiceId,
+			String pUsername, String pPassword, byte[] pDevicePrivateKey)
+			throws AuthenticationExceptionBiohazard {
 		try {
-			String lcDeviceId = "";
-			String lcUsername = "";
-			String lcPassword = "";
-			AuthenticationKeyHelper lcKeyHelper = createAuthenticationKeyHelper();
+			// String lcDeviceId = "";
+			// String lcUsername = "";
+			// String lcPassword = "";
+			AuthenticationKeyHelper lcKeyHelper = createAuthenticationKeyHelper(pDevicePrivateKey);
 
-			AuthenticationStepOne lcStepOne = createStepOne(lcDeviceId,
-					lcUsername, lcPassword);
+			AuthenticationStepOne lcStepOne = createStepOne(pDeiceId,
+					pUsername, pPassword);
 
 			AuthenticationStepOneReturn lcStepOneReturn = authenticationServiceFacade
 					.authenticateStepOne(lcStepOne, lcKeyHelper);
@@ -45,10 +80,11 @@ public class AuthenticationService {
 		}
 	}
 
-	private AuthenticationKeyHelper createAuthenticationKeyHelper() {
+	private AuthenticationKeyHelper createAuthenticationKeyHelper(
+			byte[] pDevicePrivateKey) {
 		AuthenticationKeyHelper lcResult = new AuthenticationKeyHelper();
-		lcResult.setDevicePrivateKey(new byte[1]);
-		lcResult.setServerPublicKey(new byte[1]);
+		lcResult.setDevicePrivateKey(pDevicePrivateKey);
+		lcResult.setServerPublicKey(basisInfoService.getServerPublicKey());
 		return lcResult;
 	}
 

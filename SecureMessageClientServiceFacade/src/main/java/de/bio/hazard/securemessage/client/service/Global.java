@@ -15,6 +15,9 @@ public class Global {
 		authenticationService = pAuthenticationService;
 		basisInfoService = pBasisInfoService;
 		
+		
+		
+		
 		System.err.println("hallo ich bin global");
 	}
 }
