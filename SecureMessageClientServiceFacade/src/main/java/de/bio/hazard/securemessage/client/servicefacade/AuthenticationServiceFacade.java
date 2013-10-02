@@ -41,7 +41,9 @@ public class AuthenticationServiceFacade {
 
 	public void addNewDevice(NewDeviceWebservice pToAdd) {
 		NewDeviceWebserviceDTO lcDTO = transformNewDeviceToDTO(pToAdd);
-		getAuthWSPort().addNewDevice(lcDTO);
+		NewDeviceWebserviceReturnDTO lcDTOReturn= getAuthWSPort().addNewDevice(lcDTO);
+		lcDTOReturn = decryptNewDeviceWebserviceDTO(lcDTOReturn);
+		
 	}
 
 	public void addNewUser(NewUserWebserviceDTO pToAdd)
@@ -85,6 +87,12 @@ public class AuthenticationServiceFacade {
 		AuthenticationStepTwoReturn lcReturn = transformStepTwoDTOToService(lcAuthenticationStepTwoReturnDTO);
 
 		return lcReturn;
+	}
+	
+	private NewDeviceWebserviceReturnDTO decryptNewDeviceWebserviceDTO(
+			NewDeviceWebserviceReturnDTO lcDTOReturn) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private void encryptStepOneDTO(
@@ -237,10 +245,6 @@ public class AuthenticationServiceFacade {
 		NewDeviceWebserviceDTO lcResult = new NewDeviceWebserviceDTO();
 		
 		BeanUtils.copyProperties(pDevice, lcResult);
-//		lcResult.setDevicename(pDevice.getDevicename());
-//		lcResult.setPassword(pDevice.getPassword());
-//		lcResult.setPublicKeyForDevice(pDevice.getPublicKeyForDevice());
-//		lcResult.setUsername(pDevice.getUsername());
 		return lcResult;
 	}
 	
@@ -249,10 +253,6 @@ public class AuthenticationServiceFacade {
 		NewDeviceWebserviceReturn lcResult = new NewDeviceWebserviceReturn();
 		
 		BeanUtils.copyProperties(pDeviceDTO, lcResult);
-//		lcResult.setDevicename(pDevice.getDevicename());
-//		lcResult.setPassword(pDevice.getPassword());
-//		lcResult.setPublicKeyForDevice(pDevice.getPublicKeyForDevice());
-//		lcResult.setUsername(pDevice.getUsername());
 		return lcResult;
 	}
 	
@@ -261,10 +261,6 @@ public class AuthenticationServiceFacade {
 		NewUserWebserviceDTO lcResult = new NewUserWebserviceDTO();
 		
 		BeanUtils.copyProperties(pNewUser, lcResult);
-//		lcResult.setDevicename(pDevice.getDevicename());
-//		lcResult.setPassword(pDevice.getPassword());
-//		lcResult.setPublicKeyForDevice(pDevice.getPublicKeyForDevice());
-//		lcResult.setUsername(pDevice.getUsername());
 		return lcResult;
 	}
 
