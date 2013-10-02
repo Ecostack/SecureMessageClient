@@ -155,6 +155,7 @@ public class TestWerbservice extends TestCase {
 	}
     }
 
+    
     public void testAuthNewUserWithTwoDevices() {
 	try {
 	    AuthenticationWebserviceService lcEndpointService = new AuthenticationWebserviceService(new URL("http://localhost:8080/authenticationWebservice"));
@@ -206,7 +207,7 @@ public class TestWerbservice extends TestCase {
 	lcNewUserWebserviceDTO.setSymEncryptionKey(encryptionObjectModifier.asymmetricEncrypt(pSymKey, pServerPublicKey, false));
 	lcNewUserWebserviceDTO.setEmail(encryptionObjectModifier.symmetricEncrypt(pEmail, pSymKey));
 	lcNewUserWebserviceDTO.setUsername(encryptionObjectModifier.symmetricEncrypt(pUsername, pSymKey));
-	lcNewUserWebserviceDTO.setMobilenumber(encryptionObjectModifier.symmetricEncrypt(pMobilenumber, pSymKey));
+	lcNewUserWebserviceDTO.setTelephone(encryptionObjectModifier.symmetricEncrypt(pMobilenumber, pSymKey));
 	lcNewUserWebserviceDTO.setName(encryptionObjectModifier.symmetricEncrypt(pName, pSymKey));
 	lcNewUserWebserviceDTO.setPrename(encryptionObjectModifier.symmetricEncrypt(pPrename, pSymKey));
 	lcNewUserWebserviceDTO.setPassword(encryptionObjectModifier.symmetricEncrypt(pPassword, pSymKey));

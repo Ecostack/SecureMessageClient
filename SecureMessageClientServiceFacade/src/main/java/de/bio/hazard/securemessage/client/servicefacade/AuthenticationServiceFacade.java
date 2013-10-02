@@ -1,14 +1,18 @@
 package de.bio.hazard.securemessage.client.servicefacade;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import de.bio.hazard.securemessage.client.servicefacade.helper.AuthenticationKeyHelper;
+import de.bio.hazard.securemessage.client.servicefacade.helper.NewDeviceKeyHelper;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepOne;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepOneReturn;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepTwo;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepTwoReturn;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.NewDeviceWebservice;
+import de.bio.hazard.securemessage.client.servicefacade.model.authentication.NewDeviceWebserviceReturn;
+import de.bio.hazard.securemessage.client.servicefacade.model.authentication.NewUserWebservice;
 import de.bio.hazard.securemessage.tecframework.encryption.facade.helper.EncryptionObjectModifier;
 import de.bio.hazard.securemessage.tecframework.encryption.symmetric.SymmetricKeygen;
 import de.bio.hazard.securemessage.tecframework.exception.EncryptionExceptionBiohazard;
@@ -36,15 +40,17 @@ public class AuthenticationServiceFacade {
 	@Autowired
 	private SymmetricKeygen symmetricKeygen;
 
-	public void addNewDevice(NewDeviceWebservice pToAdd) {
+	public void addNewDevice(NewDeviceWebservice pToAdd,
+			NewDeviceKeyHelper pKeyHelper) {
 		NewDeviceWebserviceDTO lcDTO = transformNewDeviceToDTO(pToAdd);
-		NewDeviceWebserviceReturnDTO lcDTOReturn= getAuthWSPort().addNewDevice(lcDTO);
-		lcDTOReturn = decryptNewDeviceWebserviceDTO(lcDTOReturn);
+		NewDeviceWebserviceReturnDTO lcDTOReturn = getAuthWSPort().addNewDevice(lcDTO);
+		lcDTOReturn = decryptNewDeviceWebserviceDTO(lcDTOReturn, pKeyHelper);
 		System.err.println("DeviceID:"+lcDTOReturn.getDeviceId());
 		System.err.println("TokenID:"+lcDTOReturn.getTokenId());
 	}
 
-	public void addNewUser(NewUserWebserviceDTO pToAdd) {
+	public void addNewUser(NewUserWebserviceDTO pToAdd)
+			throws EncryptionExceptionBiohazard_Exception {
 		getAuthWSPort().addNewUser(pToAdd);
 	}
 
@@ -81,9 +87,10 @@ public class AuthenticationServiceFacade {
 
 		return lcReturn;
 	}
-	
+
 	private NewDeviceWebserviceReturnDTO decryptNewDeviceWebserviceDTO(
-			NewDeviceWebserviceReturnDTO lcDTOReturn) {
+			NewDeviceWebserviceReturnDTO lcDTOReturn,
+			NewDeviceKeyHelper pKeyHelper) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -236,10 +243,24 @@ public class AuthenticationServiceFacade {
 	private NewDeviceWebserviceDTO transformNewDeviceToDTO(
 			NewDeviceWebservice pDevice) {
 		NewDeviceWebserviceDTO lcResult = new NewDeviceWebserviceDTO();
-		lcResult.setDevicename(pDevice.getDevicename());
-		lcResult.setPassword(pDevice.getPassword());
-		lcResult.setPublicKeyForDevice(pDevice.getPublicKeyForDevice());
-		lcResult.setUsername(pDevice.getUsername());
+
+		BeanUtils.copyProperties(pDevice, lcResult);
+		return lcResult;
+	}
+
+	private NewDeviceWebserviceReturn transformNewDeviceToDTO(
+			NewDeviceWebserviceReturnDTO pDeviceDTO) {
+		NewDeviceWebserviceReturn lcResult = new NewDeviceWebserviceReturn();
+
+		BeanUtils.copyProperties(pDeviceDTO, lcResult);
+		return lcResult;
+	}
+
+	private NewUserWebserviceDTO transformNewDeviceToDTO(
+			NewUserWebservice pNewUser) {
+		NewUserWebserviceDTO lcResult = new NewUserWebserviceDTO();
+
+		BeanUtils.copyProperties(pNewUser, lcResult);
 		return lcResult;
 	}
 

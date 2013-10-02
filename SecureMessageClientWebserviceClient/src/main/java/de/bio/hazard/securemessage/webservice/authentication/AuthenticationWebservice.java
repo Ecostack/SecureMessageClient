@@ -28,18 +28,6 @@ public interface AuthenticationWebservice {
     /**
      * 
      * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "addNewUser", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewUser")
-    @ResponseWrapper(localName = "addNewUserResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewUserResponse")
-    @Action(input = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewUserRequest", output = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewUserResponse")
-    public void addNewUser(
-        @WebParam(name = "arg0", targetNamespace = "")
-        NewUserWebserviceDTO arg0);
-
-    /**
-     * 
-     * @param arg0
      * @return
      *     returns de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceReturnDTO
      */
@@ -55,10 +43,27 @@ public interface AuthenticationWebservice {
     /**
      * 
      * @param arg0
+     * @throws EncryptionExceptionBiohazard_Exception
+     */
+    @WebMethod
+    @RequestWrapper(localName = "addNewUser", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewUser")
+    @ResponseWrapper(localName = "addNewUserResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewUserResponse")
+    @Action(input = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewUserRequest", output = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewUserResponse", fault = {
+        @FaultAction(className = EncryptionExceptionBiohazard_Exception.class, value = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewUser/Fault/EncryptionExceptionBiohazard")
+    })
+    public void addNewUser(
+        @WebParam(name = "arg0", targetNamespace = "")
+        NewUserWebserviceDTO arg0)
+        throws EncryptionExceptionBiohazard_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
      * @return
      *     returns de.bio.hazard.securemessage.webservice.authentication.AuthenticationStepOneReturnDTO
-     * @throws DeviceNotFoundException_Exception
      * @throws EncryptionExceptionBiohazard_Exception
+     * @throws DeviceNotFoundException_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
