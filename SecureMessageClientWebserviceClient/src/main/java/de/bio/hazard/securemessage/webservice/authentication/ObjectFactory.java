@@ -24,7 +24,6 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _EncryptionException_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "EncryptionException");
     private final static QName _AuthenticateStepOne_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "authenticateStepOne");
     private final static QName _AuthenticateStepTwoResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "authenticateStepTwoResponse");
     private final static QName _AddNewDeviceResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "addNewDeviceResponse");
@@ -33,6 +32,7 @@ public class ObjectFactory {
     private final static QName _AddNewUser_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "addNewUser");
     private final static QName _AuthenticateStepOneResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "authenticateStepOneResponse");
     private final static QName _AddNewUserResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "addNewUserResponse");
+    private final static QName _EncryptionExceptionBiohazard_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "EncryptionExceptionBiohazard");
     private final static QName _AddNewDevice_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "addNewDevice");
 
     /**
@@ -75,14 +75,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link EncryptionException }
-     * 
-     */
-    public EncryptionException createEncryptionException() {
-        return new EncryptionException();
-    }
-
-    /**
      * Create an instance of {@link DeviceNotFoundException }
      * 
      */
@@ -96,6 +88,14 @@ public class ObjectFactory {
      */
     public AddNewUser createAddNewUser() {
         return new AddNewUser();
+    }
+
+    /**
+     * Create an instance of {@link EncryptionExceptionBiohazard }
+     * 
+     */
+    public EncryptionExceptionBiohazard createEncryptionExceptionBiohazard() {
+        return new EncryptionExceptionBiohazard();
     }
 
     /**
@@ -128,6 +128,14 @@ public class ObjectFactory {
      */
     public AuthenticationStepTwoDTO createAuthenticationStepTwoDTO() {
         return new AuthenticationStepTwoDTO();
+    }
+
+    /**
+     * Create an instance of {@link NewDeviceWebserviceReturnDTO }
+     * 
+     */
+    public NewDeviceWebserviceReturnDTO createNewDeviceWebserviceReturnDTO() {
+        return new NewDeviceWebserviceReturnDTO();
     }
 
     /**
@@ -176,15 +184,6 @@ public class ObjectFactory {
      */
     public AbstractDTO createAbstractDTO() {
         return new AbstractDTO();
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link EncryptionException }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "EncryptionException")
-    public JAXBElement<EncryptionException> createEncryptionException(EncryptionException value) {
-        return new JAXBElement<EncryptionException>(_EncryptionException_QNAME, EncryptionException.class, null, value);
     }
 
     /**
@@ -257,6 +256,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "addNewUserResponse")
     public JAXBElement<AddNewUserResponse> createAddNewUserResponse(AddNewUserResponse value) {
         return new JAXBElement<AddNewUserResponse>(_AddNewUserResponse_QNAME, AddNewUserResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link EncryptionExceptionBiohazard }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "EncryptionExceptionBiohazard")
+    public JAXBElement<EncryptionExceptionBiohazard> createEncryptionExceptionBiohazard(EncryptionExceptionBiohazard value) {
+        return new JAXBElement<EncryptionExceptionBiohazard>(_EncryptionExceptionBiohazard_QNAME, EncryptionExceptionBiohazard.class, null, value);
     }
 
     /**

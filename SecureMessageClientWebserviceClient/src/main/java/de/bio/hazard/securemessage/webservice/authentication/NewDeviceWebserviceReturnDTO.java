@@ -7,18 +7,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for EncryptionException complex type.
+ * <p>Java class for newDeviceWebserviceReturnDTO complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="EncryptionException">
+ * &lt;complexType name="newDeviceWebserviceReturnDTO">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{http://webservice.securemessage.hazard.bio.de/}abstractDTO">
  *       &lt;sequence>
- *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="deviceId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -26,35 +26,37 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "EncryptionException", propOrder = {
-    "message"
+@XmlType(name = "newDeviceWebserviceReturnDTO", propOrder = {
+    "deviceId"
 })
-public class EncryptionException {
+public class NewDeviceWebserviceReturnDTO
+    extends AbstractDTO
+{
 
-    protected String message;
+    protected String deviceId;
 
     /**
-     * Gets the value of the message property.
+     * Gets the value of the deviceId property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getMessage() {
-        return message;
+    public String getDeviceId() {
+        return deviceId;
     }
 
     /**
-     * Sets the value of the message property.
+     * Sets the value of the deviceId property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setMessage(String value) {
-        this.message = value;
+    public void setDeviceId(String value) {
+        this.deviceId = value;
     }
 
 }

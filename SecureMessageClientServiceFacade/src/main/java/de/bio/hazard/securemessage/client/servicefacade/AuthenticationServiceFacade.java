@@ -19,8 +19,8 @@ import de.bio.hazard.securemessage.webservice.authentication.AuthenticationStepT
 import de.bio.hazard.securemessage.webservice.authentication.AuthenticationWebservice;
 import de.bio.hazard.securemessage.webservice.authentication.AuthenticationWebserviceService;
 import de.bio.hazard.securemessage.webservice.authentication.DeviceNotFoundException_Exception;
-import de.bio.hazard.securemessage.webservice.authentication.EncryptionException_Exception;
 import de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceDTO;
+import de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceReturnDTO;
 import de.bio.hazard.securemessage.webservice.authentication.NewUserWebserviceDTO;
 
 @Service
@@ -37,7 +37,9 @@ public class AuthenticationServiceFacade {
 
 	public void addNewDevice(NewDeviceWebservice pToAdd) {
 		NewDeviceWebserviceDTO lcDTO = transformNewDeviceToDTO(pToAdd);
-		getAuthWSPort().addNewDevice(lcDTO);
+		NewDeviceWebserviceReturnDTO lcDTOReturn= getAuthWSPort().addNewDevice(lcDTO);
+		lcDTOReturn = decryptNewDeviceWebserviceDTO(lcDTOReturn);
+		
 	}
 
 	public void addNewUser(NewUserWebserviceDTO pToAdd) {
@@ -46,8 +48,7 @@ public class AuthenticationServiceFacade {
 
 	public AuthenticationStepOneReturn authenticateStepOne(
 			AuthenticationStepOne lcStepOne, AuthenticationKeyHelper pKeyHelper)
-			throws DeviceNotFoundException_Exception,
-			EncryptionException_Exception, EncryptionExceptionBiohazard {
+			throws DeviceNotFoundException_Exception, EncryptionExceptionBiohazard {
 		AuthenticationStepOneDTO lcAuthenticationStepOneDTO = transformStepOneToDTO(lcStepOne);
 
 		encryptStepOneDTO(lcAuthenticationStepOneDTO, pKeyHelper);
@@ -64,8 +65,7 @@ public class AuthenticationServiceFacade {
 
 	public AuthenticationStepTwoReturn authenticateStepTwo(
 			AuthenticationStepTwo lcStepTwo, AuthenticationKeyHelper pKeyHelper)
-			throws DeviceNotFoundException_Exception,
-			EncryptionException_Exception, EncryptionExceptionBiohazard {
+			throws DeviceNotFoundException_Exception, EncryptionExceptionBiohazard {
 		AuthenticationStepTwoDTO lcAuthenticationStepTwoDTO = transformStepTwoToDTO(lcStepTwo);
 
 		encryptStepTwoDTO(lcAuthenticationStepTwoDTO, pKeyHelper);
@@ -78,6 +78,12 @@ public class AuthenticationServiceFacade {
 		AuthenticationStepTwoReturn lcReturn = transformStepTwoDTOToService(lcAuthenticationStepTwoReturnDTO);
 
 		return lcReturn;
+	}
+	
+	private NewDeviceWebserviceReturnDTO decryptNewDeviceWebserviceDTO(
+			NewDeviceWebserviceReturnDTO lcDTOReturn) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private void encryptStepOneDTO(

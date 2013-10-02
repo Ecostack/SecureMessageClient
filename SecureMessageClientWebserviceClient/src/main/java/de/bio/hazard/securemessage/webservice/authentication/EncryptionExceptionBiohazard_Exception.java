@@ -10,8 +10,8 @@ import javax.xml.ws.WebFault;
  * Generated source version: 2.2
  * 
  */
-@WebFault(name = "EncryptionException", targetNamespace = "http://webservice.securemessage.hazard.bio.de/")
-public class EncryptionException_Exception
+@WebFault(name = "EncryptionExceptionBiohazard", targetNamespace = "http://webservice.securemessage.hazard.bio.de/")
+public class EncryptionExceptionBiohazard_Exception
     extends Exception
 {
 
@@ -19,14 +19,14 @@ public class EncryptionException_Exception
      * Java type that goes as soapenv:Fault detail element.
      * 
      */
-    private EncryptionException faultInfo;
+    private EncryptionExceptionBiohazard faultInfo;
 
     /**
      * 
      * @param message
      * @param faultInfo
      */
-    public EncryptionException_Exception(String message, EncryptionException faultInfo) {
+    public EncryptionExceptionBiohazard_Exception(String message, EncryptionExceptionBiohazard faultInfo) {
         super(message);
         this.faultInfo = faultInfo;
     }
@@ -37,7 +37,7 @@ public class EncryptionException_Exception
      * @param faultInfo
      * @param cause
      */
-    public EncryptionException_Exception(String message, EncryptionException faultInfo, Throwable cause) {
+    public EncryptionExceptionBiohazard_Exception(String message, EncryptionExceptionBiohazard faultInfo, Throwable cause) {
         super(message, cause);
         this.faultInfo = faultInfo;
     }
@@ -45,9 +45,9 @@ public class EncryptionException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: de.bio.hazard.securemessage.webservice.authentication.EncryptionException
+     *     returns fault bean: de.bio.hazard.securemessage.webservice.authentication.EncryptionExceptionBiohazard
      */
-    public EncryptionException getFaultInfo() {
+    public EncryptionExceptionBiohazard getFaultInfo() {
         return faultInfo;
     }
 
