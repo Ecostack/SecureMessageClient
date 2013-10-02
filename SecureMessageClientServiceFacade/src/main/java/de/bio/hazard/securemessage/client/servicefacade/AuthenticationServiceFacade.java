@@ -1,5 +1,11 @@
 package de.bio.hazard.securemessage.client.servicefacade;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,10 +49,10 @@ public class AuthenticationServiceFacade {
 	public void addNewDevice(NewDeviceWebservice pToAdd,
 			NewDeviceKeyHelper pKeyHelper) {
 		NewDeviceWebserviceDTO lcDTO = transformNewDeviceToDTO(pToAdd);
-		NewDeviceWebserviceReturnDTO lcDTOReturn = getAuthWSPort()
-				.addNewDevice(lcDTO);
+		NewDeviceWebserviceReturnDTO lcDTOReturn = getAuthWSPort().addNewDevice(lcDTO);
 		lcDTOReturn = decryptNewDeviceWebserviceDTO(lcDTOReturn, pKeyHelper);
-
+		System.err.println("DeviceID:"+lcDTOReturn.getDeviceId());
+		System.err.println("TokenID:"+lcDTOReturn.getTokenId());
 	}
 
 	public void addNewUser(NewUserWebserviceDTO pToAdd)
@@ -56,9 +62,7 @@ public class AuthenticationServiceFacade {
 
 	public AuthenticationStepOneReturn authenticateStepOne(
 			AuthenticationStepOne lcStepOne, AuthenticationKeyHelper pKeyHelper)
-			throws DeviceNotFoundException_Exception,
-			EncryptionExceptionBiohazard,
-			EncryptionExceptionBiohazard_Exception {
+			throws DeviceNotFoundException_Exception, EncryptionExceptionBiohazard, EncryptionExceptionBiohazard_Exception {
 		AuthenticationStepOneDTO lcAuthenticationStepOneDTO = transformStepOneToDTO(lcStepOne);
 
 		encryptStepOneDTO(lcAuthenticationStepOneDTO, pKeyHelper);
@@ -75,9 +79,7 @@ public class AuthenticationServiceFacade {
 
 	public AuthenticationStepTwoReturn authenticateStepTwo(
 			AuthenticationStepTwo lcStepTwo, AuthenticationKeyHelper pKeyHelper)
-			throws DeviceNotFoundException_Exception,
-			EncryptionExceptionBiohazard,
-			EncryptionExceptionBiohazard_Exception {
+			throws DeviceNotFoundException_Exception, EncryptionExceptionBiohazard, EncryptionExceptionBiohazard_Exception {
 		AuthenticationStepTwoDTO lcAuthenticationStepTwoDTO = transformStepTwoToDTO(lcStepTwo);
 
 		encryptStepTwoDTO(lcAuthenticationStepTwoDTO, pKeyHelper);
@@ -93,10 +95,20 @@ public class AuthenticationServiceFacade {
 	}
 
 	private NewDeviceWebserviceReturnDTO decryptNewDeviceWebserviceDTO(
-			NewDeviceWebserviceReturnDTO lcDTOReturn,
-			NewDeviceKeyHelper pKeyHelper) {
-		// TODO Auto-generated method stub
-		return null;
+			NewDeviceWebserviceReturnDTO pNewDeviceWebserviceReturnDTO,
+			NewDeviceKeyHelper pKeyHelper) throws EncryptionExceptionBiohazard {
+		NewDeviceWebserviceReturnDTO lcNewDeviceWebserviceReturnDTO=pNewDeviceWebserviceReturnDTO;
+		try{
+		byte[] lcSymmetricKey = encryptionObjectModifier.asymmetricDecryptToByte(lcNewDeviceWebserviceReturnDTO.getSymEncryptionKey(), pKeyHelper.getDevicePrivateKey(), true);
+		lcNewDeviceWebserviceReturnDTO.setDeviceId(encryptionObjectModifier.symmetricDecrypt(lcNewDeviceWebserviceReturnDTO.getDeviceId(), lcSymmetricKey));
+		
+		}
+		catch(Exception  e){
+			// TODO SebastianS; Logging
+			e.printStackTrace();
+			throw new EncryptionExceptionBiohazard();
+		}
+		return lcNewDeviceWebserviceReturnDTO;
 	}
 
 	private void encryptStepOneDTO(
