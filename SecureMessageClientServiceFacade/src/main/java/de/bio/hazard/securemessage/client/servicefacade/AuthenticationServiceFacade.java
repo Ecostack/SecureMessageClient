@@ -1,5 +1,11 @@
 package de.bio.hazard.securemessage.client.servicefacade;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,10 +95,20 @@ public class AuthenticationServiceFacade {
 	}
 
 	private NewDeviceWebserviceReturnDTO decryptNewDeviceWebserviceDTO(
-			NewDeviceWebserviceReturnDTO lcDTOReturn,
-			NewDeviceKeyHelper pKeyHelper) {
-		// TODO Auto-generated method stub
-		return null;
+			NewDeviceWebserviceReturnDTO pNewDeviceWebserviceReturnDTO,
+			NewDeviceKeyHelper pKeyHelper) throws EncryptionExceptionBiohazard {
+		NewDeviceWebserviceReturnDTO lcNewDeviceWebserviceReturnDTO=pNewDeviceWebserviceReturnDTO;
+		try{
+		byte[] lcSymmetricKey = encryptionObjectModifier.asymmetricDecryptToByte(lcNewDeviceWebserviceReturnDTO.getSymEncryptionKey(), pKeyHelper.getDevicePrivateKey(), true);
+		lcNewDeviceWebserviceReturnDTO.setDeviceId(encryptionObjectModifier.symmetricDecrypt(lcNewDeviceWebserviceReturnDTO.getDeviceId(), lcSymmetricKey));
+		
+		}
+		catch(Exception  e){
+			// TODO SebastianS; Logging
+			e.printStackTrace();
+			throw new EncryptionExceptionBiohazard();
+		}
+		return lcNewDeviceWebserviceReturnDTO;
 	}
 
 	private void encryptStepOneDTO(
