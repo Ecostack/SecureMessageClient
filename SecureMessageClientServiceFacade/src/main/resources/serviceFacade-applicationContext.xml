@@ -13,6 +13,8 @@
 	<context:component-scan
 		base-package="de.bio.hazard.securemessage.client.servicefacade" />
 
+	<context:component-scan base-package="de.bio.hazard.securemessage.client.service" />
+
 	<bean id="encryptionObjectModifier"
 		class="de.bio.hazard.securemessage.tecframework.encryption.facade.helper.EncryptionObjectModifier"
 		scope="singleton" />

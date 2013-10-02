@@ -1,4 +1,4 @@
-package de.bio.hazard.securemessage.client.model.authentication;
+package de.bio.hazard.securemessage.client.servicefacade.model.authentication;
 
 public class AuthenticationStepOneReturn {
 	private String randomHashedValue;
