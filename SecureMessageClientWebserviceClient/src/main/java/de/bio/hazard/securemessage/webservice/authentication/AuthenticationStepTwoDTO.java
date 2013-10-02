@@ -16,9 +16,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;extension base="{http://webservice.securemessage.hazard.bio.de/}abstractDTO">
  *       &lt;sequence>
+ *         &lt;element name="date" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="handshakeId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="randomHashedValue" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="timestamp" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -29,17 +29,41 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "authenticationStepTwoDTO", propOrder = {
+    "date",
     "handshakeId",
-    "randomHashedValue",
-    "timestamp"
+    "randomHashedValue"
 })
 public class AuthenticationStepTwoDTO
     extends AbstractDTO
 {
 
+    protected String date;
     protected String handshakeId;
     protected String randomHashedValue;
-    protected long timestamp;
+
+    /**
+     * Gets the value of the date property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDate() {
+        return date;
+    }
+
+    /**
+     * Sets the value of the date property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDate(String value) {
+        this.date = value;
+    }
 
     /**
      * Gets the value of the handshakeId property.
@@ -87,22 +111,6 @@ public class AuthenticationStepTwoDTO
      */
     public void setRandomHashedValue(String value) {
         this.randomHashedValue = value;
-    }
-
-    /**
-     * Gets the value of the timestamp property.
-     * 
-     */
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    /**
-     * Sets the value of the timestamp property.
-     * 
-     */
-    public void setTimestamp(long value) {
-        this.timestamp = value;
     }
 
 }

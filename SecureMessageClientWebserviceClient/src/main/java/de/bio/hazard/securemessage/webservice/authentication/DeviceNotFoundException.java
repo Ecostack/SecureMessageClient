@@ -7,18 +7,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for authenticationStepTwoReturnDTO complex type.
+ * <p>Java class for DeviceNotFoundException complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="authenticationStepTwoReturnDTO">
+ * &lt;complexType name="DeviceNotFoundException">
  *   &lt;complexContent>
- *     &lt;extension base="{http://webservice.securemessage.hazard.bio.de/}abstractDTO">
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="tokenId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
- *     &lt;/extension>
+ *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -26,37 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "authenticationStepTwoReturnDTO", propOrder = {
-    "tokenId"
+@XmlType(name = "DeviceNotFoundException", propOrder = {
+    "message"
 })
-public class AuthenticationStepTwoReturnDTO
-    extends AbstractDTO
-{
+public class DeviceNotFoundException {
 
-    protected String tokenId;
+    protected String message;
 
     /**
-     * Gets the value of the tokenId property.
+     * Gets the value of the message property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getTokenId() {
-        return tokenId;
+    public String getMessage() {
+        return message;
     }
 
     /**
-     * Sets the value of the tokenId property.
+     * Sets the value of the message property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setTokenId(String value) {
-        this.tokenId = value;
+    public void setMessage(String value) {
+        this.message = value;
     }
 
 }

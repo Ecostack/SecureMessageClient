@@ -16,9 +16,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;extension base="{http://webservice.securemessage.hazard.bio.de/}abstractDTO">
  *       &lt;sequence>
+ *         &lt;element name="date" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="deviceId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="timestamp" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
@@ -30,19 +30,43 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "authenticationStepOneDTO", propOrder = {
+    "date",
     "deviceId",
     "password",
-    "timestamp",
     "username"
 })
 public class AuthenticationStepOneDTO
     extends AbstractDTO
 {
 
+    protected String date;
     protected String deviceId;
     protected String password;
-    protected long timestamp;
     protected String username;
+
+    /**
+     * Gets the value of the date property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDate() {
+        return date;
+    }
+
+    /**
+     * Sets the value of the date property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDate(String value) {
+        this.date = value;
+    }
 
     /**
      * Gets the value of the deviceId property.
@@ -90,22 +114,6 @@ public class AuthenticationStepOneDTO
      */
     public void setPassword(String value) {
         this.password = value;
-    }
-
-    /**
-     * Gets the value of the timestamp property.
-     * 
-     */
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    /**
-     * Sets the value of the timestamp property.
-     * 
-     */
-    public void setTimestamp(long value) {
-        this.timestamp = value;
     }
 
     /**

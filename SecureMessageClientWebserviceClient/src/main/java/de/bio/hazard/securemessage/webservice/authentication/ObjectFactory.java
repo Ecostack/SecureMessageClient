@@ -24,10 +24,12 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _EncryptionException_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "EncryptionException");
     private final static QName _AuthenticateStepOne_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "authenticateStepOne");
     private final static QName _AuthenticateStepTwoResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "authenticateStepTwoResponse");
     private final static QName _AddNewDeviceResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "addNewDeviceResponse");
     private final static QName _AuthenticateStepTwo_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "authenticateStepTwo");
+    private final static QName _DeviceNotFoundException_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "DeviceNotFoundException");
     private final static QName _AddNewUser_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "addNewUser");
     private final static QName _AuthenticateStepOneResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "authenticateStepOneResponse");
     private final static QName _AddNewUserResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "addNewUserResponse");
@@ -73,6 +75,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link EncryptionException }
+     * 
+     */
+    public EncryptionException createEncryptionException() {
+        return new EncryptionException();
+    }
+
+    /**
+     * Create an instance of {@link DeviceNotFoundException }
+     * 
+     */
+    public DeviceNotFoundException createDeviceNotFoundException() {
+        return new DeviceNotFoundException();
+    }
+
+    /**
      * Create an instance of {@link AddNewUser }
      * 
      */
@@ -110,14 +128,6 @@ public class ObjectFactory {
      */
     public AuthenticationStepTwoDTO createAuthenticationStepTwoDTO() {
         return new AuthenticationStepTwoDTO();
-    }
-
-    /**
-     * Create an instance of {@link AuthenticationToken }
-     * 
-     */
-    public AuthenticationToken createAuthenticationToken() {
-        return new AuthenticationToken();
     }
 
     /**
@@ -169,6 +179,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link EncryptionException }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "EncryptionException")
+    public JAXBElement<EncryptionException> createEncryptionException(EncryptionException value) {
+        return new JAXBElement<EncryptionException>(_EncryptionException_QNAME, EncryptionException.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link AuthenticateStepOne }{@code >}}
      * 
      */
@@ -202,6 +221,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "authenticateStepTwo")
     public JAXBElement<AuthenticateStepTwo> createAuthenticateStepTwo(AuthenticateStepTwo value) {
         return new JAXBElement<AuthenticateStepTwo>(_AuthenticateStepTwo_QNAME, AuthenticateStepTwo.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeviceNotFoundException }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "DeviceNotFoundException")
+    public JAXBElement<DeviceNotFoundException> createDeviceNotFoundException(DeviceNotFoundException value) {
+        return new JAXBElement<DeviceNotFoundException>(_DeviceNotFoundException_QNAME, DeviceNotFoundException.class, null, value);
     }
 
     /**

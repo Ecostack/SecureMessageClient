@@ -7,6 +7,7 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.ws.Action;
+import javax.xml.ws.FaultAction;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
@@ -27,32 +28,14 @@ public interface AuthenticationWebservice {
     /**
      * 
      * @param arg0
-     * @return
-     *     returns de.bio.hazard.securemessage.webservice.authentication.AuthenticationStepOneReturnDTO
      */
     @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "authenticateStepOne", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AuthenticateStepOne")
-    @ResponseWrapper(localName = "authenticateStepOneResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AuthenticateStepOneResponse")
-    @Action(input = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/authenticateStepOneRequest", output = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/authenticateStepOneResponse")
-    public AuthenticationStepOneReturnDTO authenticateStepOne(
+    @RequestWrapper(localName = "addNewDevice", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewDevice")
+    @ResponseWrapper(localName = "addNewDeviceResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewDeviceResponse")
+    @Action(input = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewDeviceRequest", output = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewDeviceResponse")
+    public void addNewDevice(
         @WebParam(name = "arg0", targetNamespace = "")
-        AuthenticationStepOneDTO arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns de.bio.hazard.securemessage.webservice.authentication.AuthenticationStepTwoReturnDTO
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "authenticateStepTwo", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AuthenticateStepTwo")
-    @ResponseWrapper(localName = "authenticateStepTwoResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AuthenticateStepTwoResponse")
-    @Action(input = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/authenticateStepTwoRequest", output = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/authenticateStepTwoResponse")
-    public AuthenticationStepTwoReturnDTO authenticateStepTwo(
-        @WebParam(name = "arg0", targetNamespace = "")
-        AuthenticationStepTwoDTO arg0);
+        NewDeviceWebserviceDTO arg0);
 
     /**
      * 
@@ -69,13 +52,43 @@ public interface AuthenticationWebservice {
     /**
      * 
      * @param arg0
+     * @return
+     *     returns de.bio.hazard.securemessage.webservice.authentication.AuthenticationStepTwoReturnDTO
+     * @throws EncryptionException_Exception
      */
     @WebMethod
-    @RequestWrapper(localName = "addNewDevice", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewDevice")
-    @ResponseWrapper(localName = "addNewDeviceResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewDeviceResponse")
-    @Action(input = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewDeviceRequest", output = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewDeviceResponse")
-    public void addNewDevice(
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "authenticateStepTwo", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AuthenticateStepTwo")
+    @ResponseWrapper(localName = "authenticateStepTwoResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AuthenticateStepTwoResponse")
+    @Action(input = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/authenticateStepTwoRequest", output = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/authenticateStepTwoResponse", fault = {
+        @FaultAction(className = EncryptionException_Exception.class, value = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/authenticateStepTwo/Fault/EncryptionException")
+    })
+    public AuthenticationStepTwoReturnDTO authenticateStepTwo(
         @WebParam(name = "arg0", targetNamespace = "")
-        NewDeviceWebserviceDTO arg0);
+        AuthenticationStepTwoDTO arg0)
+        throws EncryptionException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns de.bio.hazard.securemessage.webservice.authentication.AuthenticationStepOneReturnDTO
+     * @throws DeviceNotFoundException_Exception
+     * @throws EncryptionException_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "authenticateStepOne", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AuthenticateStepOne")
+    @ResponseWrapper(localName = "authenticateStepOneResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AuthenticateStepOneResponse")
+    @Action(input = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/authenticateStepOneRequest", output = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/authenticateStepOneResponse", fault = {
+        @FaultAction(className = EncryptionException_Exception.class, value = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/authenticateStepOne/Fault/EncryptionException"),
+        @FaultAction(className = DeviceNotFoundException_Exception.class, value = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/authenticateStepOne/Fault/DeviceNotFoundException")
+    })
+    public AuthenticationStepOneReturnDTO authenticateStepOne(
+        @WebParam(name = "arg0", targetNamespace = "")
+        AuthenticationStepOneDTO arg0)
+        throws DeviceNotFoundException_Exception, EncryptionException_Exception
+    ;
 
 }
