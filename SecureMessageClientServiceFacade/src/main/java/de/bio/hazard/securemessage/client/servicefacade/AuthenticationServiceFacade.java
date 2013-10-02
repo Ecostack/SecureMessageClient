@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import de.bio.hazard.securemessage.client.servicefacade.helper.AuthenticationKeyHelper;
+import de.bio.hazard.securemessage.client.servicefacade.helper.NewDeviceKeyHelper;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepOne;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepOneReturn;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepTwo;
@@ -39,11 +40,13 @@ public class AuthenticationServiceFacade {
 	@Autowired
 	private SymmetricKeygen symmetricKeygen;
 
-	public void addNewDevice(NewDeviceWebservice pToAdd) {
+	public void addNewDevice(NewDeviceWebservice pToAdd,
+			NewDeviceKeyHelper pKeyHelper) {
 		NewDeviceWebserviceDTO lcDTO = transformNewDeviceToDTO(pToAdd);
-		NewDeviceWebserviceReturnDTO lcDTOReturn= getAuthWSPort().addNewDevice(lcDTO);
-		lcDTOReturn = decryptNewDeviceWebserviceDTO(lcDTOReturn);
-		
+		NewDeviceWebserviceReturnDTO lcDTOReturn = getAuthWSPort()
+				.addNewDevice(lcDTO);
+		lcDTOReturn = decryptNewDeviceWebserviceDTO(lcDTOReturn, pKeyHelper);
+
 	}
 
 	public void addNewUser(NewUserWebserviceDTO pToAdd)
@@ -54,7 +57,7 @@ public class AuthenticationServiceFacade {
 	public AuthenticationStepOneReturn authenticateStepOne(
 			AuthenticationStepOne lcStepOne, AuthenticationKeyHelper pKeyHelper)
 			throws DeviceNotFoundException_Exception,
-			 EncryptionExceptionBiohazard,
+			EncryptionExceptionBiohazard,
 			EncryptionExceptionBiohazard_Exception {
 		AuthenticationStepOneDTO lcAuthenticationStepOneDTO = transformStepOneToDTO(lcStepOne);
 
@@ -88,9 +91,10 @@ public class AuthenticationServiceFacade {
 
 		return lcReturn;
 	}
-	
+
 	private NewDeviceWebserviceReturnDTO decryptNewDeviceWebserviceDTO(
-			NewDeviceWebserviceReturnDTO lcDTOReturn) {
+			NewDeviceWebserviceReturnDTO lcDTOReturn,
+			NewDeviceKeyHelper pKeyHelper) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -243,23 +247,23 @@ public class AuthenticationServiceFacade {
 	private NewDeviceWebserviceDTO transformNewDeviceToDTO(
 			NewDeviceWebservice pDevice) {
 		NewDeviceWebserviceDTO lcResult = new NewDeviceWebserviceDTO();
-		
+
 		BeanUtils.copyProperties(pDevice, lcResult);
 		return lcResult;
 	}
-	
+
 	private NewDeviceWebserviceReturn transformNewDeviceToDTO(
 			NewDeviceWebserviceReturnDTO pDeviceDTO) {
 		NewDeviceWebserviceReturn lcResult = new NewDeviceWebserviceReturn();
-		
+
 		BeanUtils.copyProperties(pDeviceDTO, lcResult);
 		return lcResult;
 	}
-	
+
 	private NewUserWebserviceDTO transformNewDeviceToDTO(
 			NewUserWebservice pNewUser) {
 		NewUserWebserviceDTO lcResult = new NewUserWebserviceDTO();
-		
+
 		BeanUtils.copyProperties(pNewUser, lcResult);
 		return lcResult;
 	}
