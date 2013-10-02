@@ -19,6 +19,7 @@ import de.bio.hazard.securemessage.webservice.authentication.AuthenticationStepT
 import de.bio.hazard.securemessage.webservice.authentication.AuthenticationWebservice;
 import de.bio.hazard.securemessage.webservice.authentication.AuthenticationWebserviceService;
 import de.bio.hazard.securemessage.webservice.authentication.DeviceNotFoundException_Exception;
+import de.bio.hazard.securemessage.webservice.authentication.EncryptionExceptionBiohazard_Exception;
 import de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceDTO;
 import de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceReturnDTO;
 import de.bio.hazard.securemessage.webservice.authentication.NewUserWebserviceDTO;
@@ -39,7 +40,8 @@ public class AuthenticationServiceFacade {
 		NewDeviceWebserviceDTO lcDTO = transformNewDeviceToDTO(pToAdd);
 		NewDeviceWebserviceReturnDTO lcDTOReturn= getAuthWSPort().addNewDevice(lcDTO);
 		lcDTOReturn = decryptNewDeviceWebserviceDTO(lcDTOReturn);
-		
+		System.err.println("DeviceID:"+lcDTOReturn.getDeviceId());
+		System.err.println("TokenID:"+lcDTOReturn.getTokenId());
 	}
 
 	public void addNewUser(NewUserWebserviceDTO pToAdd) {
@@ -48,7 +50,7 @@ public class AuthenticationServiceFacade {
 
 	public AuthenticationStepOneReturn authenticateStepOne(
 			AuthenticationStepOne lcStepOne, AuthenticationKeyHelper pKeyHelper)
-			throws DeviceNotFoundException_Exception, EncryptionExceptionBiohazard {
+			throws DeviceNotFoundException_Exception, EncryptionExceptionBiohazard, EncryptionExceptionBiohazard_Exception {
 		AuthenticationStepOneDTO lcAuthenticationStepOneDTO = transformStepOneToDTO(lcStepOne);
 
 		encryptStepOneDTO(lcAuthenticationStepOneDTO, pKeyHelper);
@@ -65,7 +67,7 @@ public class AuthenticationServiceFacade {
 
 	public AuthenticationStepTwoReturn authenticateStepTwo(
 			AuthenticationStepTwo lcStepTwo, AuthenticationKeyHelper pKeyHelper)
-			throws DeviceNotFoundException_Exception, EncryptionExceptionBiohazard {
+			throws DeviceNotFoundException_Exception, EncryptionExceptionBiohazard, EncryptionExceptionBiohazard_Exception {
 		AuthenticationStepTwoDTO lcAuthenticationStepTwoDTO = transformStepTwoToDTO(lcStepTwo);
 
 		encryptStepTwoDTO(lcAuthenticationStepTwoDTO, pKeyHelper);
