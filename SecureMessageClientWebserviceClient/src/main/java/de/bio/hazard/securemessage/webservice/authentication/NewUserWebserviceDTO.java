@@ -17,11 +17,11 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;extension base="{http://webservice.securemessage.hazard.bio.de/}abstractDTO">
  *       &lt;sequence>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="mobilenumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="prename" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="publicKeyForMessaging" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="telephone" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
@@ -34,11 +34,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "newUserWebserviceDTO", propOrder = {
     "email",
-    "mobilenumber",
     "name",
     "password",
     "prename",
     "publicKeyForMessaging",
+    "telephone",
     "username"
 })
 public class NewUserWebserviceDTO
@@ -46,11 +46,11 @@ public class NewUserWebserviceDTO
 {
 
     protected String email;
-    protected String mobilenumber;
     protected String name;
     protected String password;
     protected String prename;
     protected String publicKeyForMessaging;
+    protected String telephone;
     protected String username;
 
     /**
@@ -75,30 +75,6 @@ public class NewUserWebserviceDTO
      */
     public void setEmail(String value) {
         this.email = value;
-    }
-
-    /**
-     * Gets the value of the mobilenumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMobilenumber() {
-        return mobilenumber;
-    }
-
-    /**
-     * Sets the value of the mobilenumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMobilenumber(String value) {
-        this.mobilenumber = value;
     }
 
     /**
@@ -195,6 +171,30 @@ public class NewUserWebserviceDTO
      */
     public void setPublicKeyForMessaging(String value) {
         this.publicKeyForMessaging = value;
+    }
+
+    /**
+     * Gets the value of the telephone property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getTelephone() {
+        return telephone;
+    }
+
+    /**
+     * Sets the value of the telephone property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTelephone(String value) {
+        this.telephone = value;
     }
 
     /**

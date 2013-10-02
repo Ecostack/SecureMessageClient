@@ -1,5 +1,6 @@
 package de.bio.hazard.securemessage.client.servicefacade;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,8 @@ import de.bio.hazard.securemessage.client.servicefacade.model.authentication.Aut
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepTwo;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepTwoReturn;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.NewDeviceWebservice;
+import de.bio.hazard.securemessage.client.servicefacade.model.authentication.NewDeviceWebserviceReturn;
+import de.bio.hazard.securemessage.client.servicefacade.model.authentication.NewUserWebservice;
 import de.bio.hazard.securemessage.tecframework.encryption.facade.helper.EncryptionObjectModifier;
 import de.bio.hazard.securemessage.tecframework.encryption.symmetric.SymmetricKeygen;
 import de.bio.hazard.securemessage.tecframework.exception.EncryptionExceptionBiohazard;
@@ -19,8 +22,9 @@ import de.bio.hazard.securemessage.webservice.authentication.AuthenticationStepT
 import de.bio.hazard.securemessage.webservice.authentication.AuthenticationWebservice;
 import de.bio.hazard.securemessage.webservice.authentication.AuthenticationWebserviceService;
 import de.bio.hazard.securemessage.webservice.authentication.DeviceNotFoundException_Exception;
-import de.bio.hazard.securemessage.webservice.authentication.EncryptionException_Exception;
+import de.bio.hazard.securemessage.webservice.authentication.EncryptionExceptionBiohazard_Exception;
 import de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceDTO;
+import de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceReturnDTO;
 import de.bio.hazard.securemessage.webservice.authentication.NewUserWebserviceDTO;
 
 @Service
@@ -40,14 +44,16 @@ public class AuthenticationServiceFacade {
 		getAuthWSPort().addNewDevice(lcDTO);
 	}
 
-	public void addNewUser(NewUserWebserviceDTO pToAdd) {
+	public void addNewUser(NewUserWebserviceDTO pToAdd)
+			throws EncryptionExceptionBiohazard_Exception {
 		getAuthWSPort().addNewUser(pToAdd);
 	}
 
 	public AuthenticationStepOneReturn authenticateStepOne(
 			AuthenticationStepOne lcStepOne, AuthenticationKeyHelper pKeyHelper)
 			throws DeviceNotFoundException_Exception,
-			EncryptionException_Exception, EncryptionExceptionBiohazard {
+			 EncryptionExceptionBiohazard,
+			EncryptionExceptionBiohazard_Exception {
 		AuthenticationStepOneDTO lcAuthenticationStepOneDTO = transformStepOneToDTO(lcStepOne);
 
 		encryptStepOneDTO(lcAuthenticationStepOneDTO, pKeyHelper);
@@ -65,7 +71,8 @@ public class AuthenticationServiceFacade {
 	public AuthenticationStepTwoReturn authenticateStepTwo(
 			AuthenticationStepTwo lcStepTwo, AuthenticationKeyHelper pKeyHelper)
 			throws DeviceNotFoundException_Exception,
-			EncryptionException_Exception, EncryptionExceptionBiohazard {
+			EncryptionExceptionBiohazard,
+			EncryptionExceptionBiohazard_Exception {
 		AuthenticationStepTwoDTO lcAuthenticationStepTwoDTO = transformStepTwoToDTO(lcStepTwo);
 
 		encryptStepTwoDTO(lcAuthenticationStepTwoDTO, pKeyHelper);
@@ -228,10 +235,36 @@ public class AuthenticationServiceFacade {
 	private NewDeviceWebserviceDTO transformNewDeviceToDTO(
 			NewDeviceWebservice pDevice) {
 		NewDeviceWebserviceDTO lcResult = new NewDeviceWebserviceDTO();
-		lcResult.setDevicename(pDevice.getDevicename());
-		lcResult.setPassword(pDevice.getPassword());
-		lcResult.setPublicKeyForDevice(pDevice.getPublicKeyForDevice());
-		lcResult.setUsername(pDevice.getUsername());
+		
+		BeanUtils.copyProperties(pDevice, lcResult);
+//		lcResult.setDevicename(pDevice.getDevicename());
+//		lcResult.setPassword(pDevice.getPassword());
+//		lcResult.setPublicKeyForDevice(pDevice.getPublicKeyForDevice());
+//		lcResult.setUsername(pDevice.getUsername());
+		return lcResult;
+	}
+	
+	private NewDeviceWebserviceReturn transformNewDeviceToDTO(
+			NewDeviceWebserviceReturnDTO pDeviceDTO) {
+		NewDeviceWebserviceReturn lcResult = new NewDeviceWebserviceReturn();
+		
+		BeanUtils.copyProperties(pDeviceDTO, lcResult);
+//		lcResult.setDevicename(pDevice.getDevicename());
+//		lcResult.setPassword(pDevice.getPassword());
+//		lcResult.setPublicKeyForDevice(pDevice.getPublicKeyForDevice());
+//		lcResult.setUsername(pDevice.getUsername());
+		return lcResult;
+	}
+	
+	private NewUserWebserviceDTO transformNewDeviceToDTO(
+			NewUserWebservice pNewUser) {
+		NewUserWebserviceDTO lcResult = new NewUserWebserviceDTO();
+		
+		BeanUtils.copyProperties(pNewUser, lcResult);
+//		lcResult.setDevicename(pDevice.getDevicename());
+//		lcResult.setPassword(pDevice.getPassword());
+//		lcResult.setPublicKeyForDevice(pDevice.getPublicKeyForDevice());
+//		lcResult.setUsername(pDevice.getUsername());
 		return lcResult;
 	}
 

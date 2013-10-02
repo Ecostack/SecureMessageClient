@@ -16,7 +16,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;extension base="{http://webservice.securemessage.hazard.bio.de/}abstractDTO">
  *       &lt;sequence>
- *         &lt;element name="tokenId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
  *   &lt;/complexContent>
@@ -26,37 +25,10 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "authenticationStepTwoReturnDTO", propOrder = {
-    "tokenId"
-})
+@XmlType(name = "authenticationStepTwoReturnDTO")
 public class AuthenticationStepTwoReturnDTO
     extends AbstractDTO
 {
 
-    protected String tokenId;
-
-    /**
-     * Gets the value of the tokenId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTokenId() {
-        return tokenId;
-    }
-
-    /**
-     * Sets the value of the tokenId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTokenId(String value) {
-        this.tokenId = value;
-    }
 
 }
