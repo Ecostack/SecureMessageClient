@@ -45,9 +45,9 @@ public class AuthenticationServiceFacade {
 
 	@Autowired
 	private SymmetricKeygen symmetricKeygen;
-
+	
 	public void addNewDevice(NewDeviceWebservice pToAdd,
-			NewDeviceKeyHelper pKeyHelper) {
+			NewDeviceKeyHelper pKeyHelper) throws EncryptionExceptionBiohazard {
 		NewDeviceWebserviceDTO lcDTO = transformNewDeviceToDTO(pToAdd);
 		NewDeviceWebserviceReturnDTO lcDTOReturn = getAuthWSPort().addNewDevice(lcDTO);
 		lcDTOReturn = decryptNewDeviceWebserviceDTO(lcDTOReturn, pKeyHelper);
@@ -92,6 +92,23 @@ public class AuthenticationServiceFacade {
 		AuthenticationStepTwoReturn lcReturn = transformStepTwoDTOToService(lcAuthenticationStepTwoReturnDTO);
 
 		return lcReturn;
+	}
+	
+	private NewDeviceWebserviceDTO encryptNewDeviceWebserviceDTO(
+			NewDeviceWebserviceDTO pNewDeviceWebserviceDTO,
+			NewDeviceKeyHelper pKeyHelper) throws EncryptionExceptionBiohazard {
+		NewDeviceWebserviceDTO lcNewDeviceWebserviceReturnDTO=pNewDeviceWebserviceDTO;
+		try{
+		byte[] lcSymmetricKey = encryptionObjectModifier.asymmetricDecryptToByte(lcNewDeviceWebserviceReturnDTO.getSymEncryptionKey(), pKeyHelper.getDevicePrivateKey(), true);
+		lcNewDeviceWebserviceReturnDTO.setDeviceId(encryptionObjectModifier.symmetricDecrypt(lcNewDeviceWebserviceReturnDTO.getDeviceId(), lcSymmetricKey));
+		
+		}
+		catch(Exception  e){
+			// TODO SebastianS; Logging
+			e.printStackTrace();
+			throw new EncryptionExceptionBiohazard();
+		}
+		return lcNewDeviceWebserviceReturnDTO;
 	}
 
 	private NewDeviceWebserviceReturnDTO decryptNewDeviceWebserviceDTO(
@@ -261,6 +278,7 @@ public class AuthenticationServiceFacade {
 		NewDeviceWebserviceDTO lcResult = new NewDeviceWebserviceDTO();
 
 		BeanUtils.copyProperties(pDevice, lcResult);
+
 		return lcResult;
 	}
 
@@ -272,7 +290,7 @@ public class AuthenticationServiceFacade {
 		return lcResult;
 	}
 
-	private NewUserWebserviceDTO transformNewDeviceToDTO(
+	private NewUserWebserviceDTO transformNewUserToDTO(
 			NewUserWebservice pNewUser) {
 		NewUserWebserviceDTO lcResult = new NewUserWebserviceDTO();
 

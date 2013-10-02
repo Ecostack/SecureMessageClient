@@ -18,6 +18,8 @@ import de.bio.hazard.securemessage.client.servicefacade.model.authentication.New
 import de.bio.hazard.securemessage.tecframework.data.validation.DateUtils;
 import de.bio.hazard.securemessage.tecframework.encryption.facade.helper.EncryptionObjectModifier;
 import de.bio.hazard.securemessage.tecframework.exception.AuthenticationExceptionBiohazard;
+import de.bio.hazard.securemessage.tecframework.exception.EncryptionExceptionBiohazard;
+import de.bio.hazard.securemessage.tecframework.exception.NewDeviceExceptionBiohazard;
 import de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceDTO;
 import de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceReturnDTO;
 
@@ -42,8 +44,12 @@ public class AuthenticationService {
 //		lcDeviceWebservice.setPublicKeyForDevice(encryptionObjectModifier
 //				.encodeBase64(pDevicePublicKey));
 
-		authenticationServiceFacade
-				.addNewDevice(pNewDeviceWebservice, pKeyHelper);
+		try {
+			authenticationServiceFacade
+					.addNewDevice(pNewDeviceWebservice, pKeyHelper);
+		} catch (EncryptionExceptionBiohazard e) {
+			throw new NewDeviceExceptionBiohazard();
+		}
 
 	}
 

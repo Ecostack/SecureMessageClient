@@ -5,7 +5,7 @@ public class NewDeviceWebservice {
 	private String username;
 	private String password;
 	private String devicename;
-	private String publicKeyForDevice;
+	private byte[] publicKeyForDevice;
 
 	public String getUsername() {
 		return username;
@@ -31,11 +31,12 @@ public class NewDeviceWebservice {
 		this.devicename = devicename;
 	}
 
-	public String getPublicKeyForDevice() {
+	public byte[] getPublicKeyForDevice() {
 		return publicKeyForDevice;
 	}
 
-	public void setPublicKeyForDevice(String publicKeyForDevice) {
+	public void setPublicKeyForDevice(byte[] publicKeyForDevice) {
 		this.publicKeyForDevice = publicKeyForDevice;
 	}
+
 }

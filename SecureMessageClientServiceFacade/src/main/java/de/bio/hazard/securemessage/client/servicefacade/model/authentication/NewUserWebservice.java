@@ -7,7 +7,7 @@ public class NewUserWebservice {
 	private String mobilenumber;
 	private String name;
 	private String prename;
-	private String publicKeyForMessaging;
+	private byte[] publicKeyForMessaging;
 
 	public String getUsername() {
 		return username;
@@ -57,11 +57,12 @@ public class NewUserWebservice {
 		this.prename = prename;
 	}
 
-	public String getPublicKeyForMessaging() {
+	public byte[] getPublicKeyForMessaging() {
 		return publicKeyForMessaging;
 	}
 
-	public void setPublicKeyForMessaging(String publicKeyForMessaging) {
+	public void setPublicKeyForMessaging(byte[] publicKeyForMessaging) {
 		this.publicKeyForMessaging = publicKeyForMessaging;
 	}
+
 }
