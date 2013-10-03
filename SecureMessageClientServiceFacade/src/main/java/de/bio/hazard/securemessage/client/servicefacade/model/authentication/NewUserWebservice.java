@@ -1,12 +1,12 @@
 package de.bio.hazard.securemessage.client.servicefacade.model.authentication;
 
 public class NewUserWebservice {
-	private String username;
-	private String password;
 	private String email;
-	private String mobilenumber;
 	private String name;
+	private String password;
 	private String prename;
+	private String telephone;
+	private String username;
 	private byte[] publicKeyForMessaging;
 
 	public String getUsername() {
@@ -33,14 +33,6 @@ public class NewUserWebservice {
 		this.email = email;
 	}
 
-	public String getMobilenumber() {
-		return mobilenumber;
-	}
-
-	public void setMobilenumber(String mobilenumber) {
-		this.mobilenumber = mobilenumber;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -63,6 +55,14 @@ public class NewUserWebservice {
 
 	public void setPublicKeyForMessaging(byte[] publicKeyForMessaging) {
 		this.publicKeyForMessaging = publicKeyForMessaging;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
 }

@@ -9,19 +9,20 @@ import org.springframework.stereotype.Service;
 import de.bio.hazard.securemessage.client.servicefacade.AuthenticationServiceFacade;
 import de.bio.hazard.securemessage.client.servicefacade.helper.AuthenticationKeyHelper;
 import de.bio.hazard.securemessage.client.servicefacade.helper.NewDeviceKeyHelper;
+import de.bio.hazard.securemessage.client.servicefacade.helper.NewUserKeyHelper;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepOne;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepOneReturn;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepTwo;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.AuthenticationStepTwoReturn;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.NewDeviceWebservice;
+import de.bio.hazard.securemessage.client.servicefacade.model.authentication.NewDeviceWebserviceReturn;
 import de.bio.hazard.securemessage.client.servicefacade.model.authentication.NewUserWebservice;
 import de.bio.hazard.securemessage.tecframework.data.validation.DateUtils;
 import de.bio.hazard.securemessage.tecframework.encryption.facade.helper.EncryptionObjectModifier;
 import de.bio.hazard.securemessage.tecframework.exception.AuthenticationExceptionBiohazard;
 import de.bio.hazard.securemessage.tecframework.exception.EncryptionExceptionBiohazard;
 import de.bio.hazard.securemessage.tecframework.exception.NewDeviceExceptionBiohazard;
-import de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceDTO;
-import de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceReturnDTO;
+import de.bio.hazard.securemessage.webservice.authentication.EncryptionExceptionBiohazard_Exception;
 
 @Service
 public class AuthenticationService {
@@ -35,28 +36,34 @@ public class AuthenticationService {
 	@Autowired
 	private EncryptionObjectModifier encryptionObjectModifier;
 
-	public void addNewDevice(NewDeviceWebservice pNewDeviceWebservice,
+	public NewDeviceWebserviceReturn addNewDevice(
+			NewDeviceWebservice pNewDeviceWebservice,
 			NewDeviceKeyHelper pKeyHelper) {
-//		NewDeviceWebservice lcDeviceWebservice = new NewDeviceWebservice();
-//		lcDeviceWebservice.setDevicename(pDevicename);
-//		lcDeviceWebservice.setUsername(pUsername);
-//		lcDeviceWebservice.setPassword(pPassword);
-//		lcDeviceWebservice.setPublicKeyForDevice(encryptionObjectModifier
-//				.encodeBase64(pDevicePublicKey));
-
+		
+		pKeyHelper.setDevicePublicKey(pNewDeviceWebservice
+				.getPublicKeyForDevice());
 		try {
-			authenticationServiceFacade
-					.addNewDevice(pNewDeviceWebservice, pKeyHelper);
+			return authenticationServiceFacade.addNewDevice(
+					pNewDeviceWebservice, pKeyHelper);
 		} catch (EncryptionExceptionBiohazard e) {
 			throw new NewDeviceExceptionBiohazard();
 		}
 
 	}
 
-	public void addNewUser(NewUserWebservice pNewUserWebservice) {
-//
-//		authenticationServiceFacade
-//				.addNewUser(pNewUserWebservice);
+	public void addNewUser(NewUserWebservice pNewUserWebservice,
+			NewUserKeyHelper pKeyHelper) {
+		
+		pKeyHelper.setPublicKeyForMessaging(pNewUserWebservice
+				.getPublicKeyForMessaging());
+		try {
+			authenticationServiceFacade.addNewUser(pNewUserWebservice,
+					pKeyHelper);
+		} catch (EncryptionExceptionBiohazard e) {
+			throw new NewDeviceExceptionBiohazard();
+		} catch (EncryptionExceptionBiohazard_Exception e) {
+			throw new NewDeviceExceptionBiohazard();
+		}
 
 	}
 
