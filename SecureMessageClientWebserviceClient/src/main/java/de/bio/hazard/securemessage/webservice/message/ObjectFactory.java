@@ -26,6 +26,7 @@ public class ObjectFactory {
 
     private final static QName _AddMessageResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "addMessageResponse");
     private final static QName _AddMessage_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "addMessage");
+    private final static QName _EncryptionExceptionBiohazard_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "EncryptionExceptionBiohazard");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: de.bio.hazard.securemessage.webservice.message
@@ -51,11 +52,51 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link EncryptionExceptionBiohazard }
+     * 
+     */
+    public EncryptionExceptionBiohazard createEncryptionExceptionBiohazard() {
+        return new EncryptionExceptionBiohazard();
+    }
+
+    /**
+     * Create an instance of {@link MessageReceiverWebserviceDTO }
+     * 
+     */
+    public MessageReceiverWebserviceDTO createMessageReceiverWebserviceDTO() {
+        return new MessageReceiverWebserviceDTO();
+    }
+
+    /**
      * Create an instance of {@link MessageWebserviceDTO }
      * 
      */
     public MessageWebserviceDTO createMessageWebserviceDTO() {
         return new MessageWebserviceDTO();
+    }
+
+    /**
+     * Create an instance of {@link MessageContentWebserviceDTO }
+     * 
+     */
+    public MessageContentWebserviceDTO createMessageContentWebserviceDTO() {
+        return new MessageContentWebserviceDTO();
+    }
+
+    /**
+     * Create an instance of {@link MessageContentKeyWebserviceDTO }
+     * 
+     */
+    public MessageContentKeyWebserviceDTO createMessageContentKeyWebserviceDTO() {
+        return new MessageContentKeyWebserviceDTO();
+    }
+
+    /**
+     * Create an instance of {@link AbstractDTO }
+     * 
+     */
+    public AbstractDTO createAbstractDTO() {
+        return new AbstractDTO();
     }
 
     /**
@@ -74,6 +115,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "addMessage")
     public JAXBElement<AddMessage> createAddMessage(AddMessage value) {
         return new JAXBElement<AddMessage>(_AddMessage_QNAME, AddMessage.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link EncryptionExceptionBiohazard }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "EncryptionExceptionBiohazard")
+    public JAXBElement<EncryptionExceptionBiohazard> createEncryptionExceptionBiohazard(EncryptionExceptionBiohazard value) {
+        return new JAXBElement<EncryptionExceptionBiohazard>(_EncryptionExceptionBiohazard_QNAME, EncryptionExceptionBiohazard.class, null, value);
     }
 
 }

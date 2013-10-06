@@ -6,6 +6,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.ws.Action;
+import javax.xml.ws.FaultAction;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
@@ -26,13 +27,18 @@ public interface MessageWebservice {
     /**
      * 
      * @param arg0
+     * @throws EncryptionExceptionBiohazard_Exception
      */
     @WebMethod
     @RequestWrapper(localName = "addMessage", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.message.AddMessage")
     @ResponseWrapper(localName = "addMessageResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.message.AddMessageResponse")
-    @Action(input = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessageRequest", output = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessageResponse")
+    @Action(input = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessageRequest", output = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessageResponse", fault = {
+        @FaultAction(className = EncryptionExceptionBiohazard_Exception.class, value = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessage/Fault/EncryptionExceptionBiohazard")
+    })
     public void addMessage(
         @WebParam(name = "arg0", targetNamespace = "")
-        MessageWebserviceDTO arg0);
+        MessageWebserviceDTO arg0)
+        throws EncryptionExceptionBiohazard_Exception
+    ;
 
 }

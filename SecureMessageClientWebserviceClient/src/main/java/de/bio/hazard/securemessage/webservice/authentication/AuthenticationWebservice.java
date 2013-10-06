@@ -28,21 +28,6 @@ public interface AuthenticationWebservice {
     /**
      * 
      * @param arg0
-     * @return
-     *     returns de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceReturnDTO
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "addNewDevice", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewDevice")
-    @ResponseWrapper(localName = "addNewDeviceResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewDeviceResponse")
-    @Action(input = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewDeviceRequest", output = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewDeviceResponse")
-    public NewDeviceWebserviceReturnDTO addNewDevice(
-        @WebParam(name = "arg0", targetNamespace = "")
-        NewDeviceWebserviceDTO arg0);
-
-    /**
-     * 
-     * @param arg0
      * @throws EncryptionExceptionBiohazard_Exception
      */
     @WebMethod
@@ -56,6 +41,21 @@ public interface AuthenticationWebservice {
         NewUserWebserviceDTO arg0)
         throws EncryptionExceptionBiohazard_Exception
     ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns de.bio.hazard.securemessage.webservice.authentication.NewDeviceWebserviceReturnDTO
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "addNewDevice", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewDevice")
+    @ResponseWrapper(localName = "addNewDeviceResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.authentication.AddNewDeviceResponse")
+    @Action(input = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewDeviceRequest", output = "http://webservice.securemessage.hazard.bio.de/AuthenticationWebservice/addNewDeviceResponse")
+    public NewDeviceWebserviceReturnDTO addNewDevice(
+        @WebParam(name = "arg0", targetNamespace = "")
+        NewDeviceWebserviceDTO arg0);
 
     /**
      * 

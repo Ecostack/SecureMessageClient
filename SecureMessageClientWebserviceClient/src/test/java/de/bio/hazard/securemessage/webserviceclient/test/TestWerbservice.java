@@ -27,23 +27,23 @@ import de.bio.hazard.securemessage.webservice.message.MessageWebserviceService;
 
 public class TestWerbservice extends TestCase {
 
-    public void testMessage() {
-	try {
-	    MessageWebserviceService lcEndpointService = new MessageWebserviceService(new URL("http://localhost:8080/messageWebservice"));
-
-	    MessageWebservice lcEndpoint = lcEndpointService.getMessageWebservicePort();
-
-	    MessageWebserviceDTO lcMessageWebserviceDTO = new MessageWebserviceDTO();
-	    lcMessageWebserviceDTO.setMessageText("Mein Text vom WS");
-	    lcMessageWebserviceDTO.setSubject("Mein Subject vom WS");
-
-	    lcEndpoint.addMessage(lcMessageWebserviceDTO);
-	}
-	catch (Exception e) {
-	    e.printStackTrace();
-	    assertTrue(false);
-	}
-    }
+//    public void testMessage() {
+//	try {
+//	    MessageWebserviceService lcEndpointService = new MessageWebserviceService(new URL("http://localhost:8080/messageWebservice"));
+//
+//	    MessageWebservice lcEndpoint = lcEndpointService.getMessageWebservicePort();
+//
+//	    MessageWebserviceDTO lcMessageWebserviceDTO = new MessageWebserviceDTO();
+//	    lcMessageWebserviceDTO.setMessageText("Mein Text vom WS");
+//	    lcMessageWebserviceDTO.setSubject("Mein Subject vom WS");
+//
+//	    lcEndpoint.addMessage(lcMessageWebserviceDTO);
+//	}
+//	catch (Exception e) {
+//	    e.printStackTrace();
+//	    assertTrue(false);
+//	}
+//    }
 
     public void testBasisInfo() {
 	try {
