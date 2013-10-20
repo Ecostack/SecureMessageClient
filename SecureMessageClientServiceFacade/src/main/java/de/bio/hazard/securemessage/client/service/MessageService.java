@@ -37,6 +37,17 @@ public class MessageService {
 	    throw new MessageExceptionBiohazard();
 	}
     }
+    
+    public List<Message> getMessages(CommunicationKeyHelper pCommunicationKey) throws MessageExceptionBiohazard{
+	try {
+	    return messageServiceFacade.getMessages(pCommunicationKey);
+	}
+	catch (EncryptionExceptionBiohazard exb) {
+	    exb.printStackTrace();
+	    // TODO SebastianS; Logging
+	    throw new MessageExceptionBiohazard();
+	}
+    }
 
     private HashMap<String, byte[]> getUserPublicKeys(List<MessageReceiver> pReceiver, CommunicationKeyHelper pCommunicationKey) {
 	HashMap<String, byte[]> lcUserPublicKeys = new HashMap<String, byte[]>();

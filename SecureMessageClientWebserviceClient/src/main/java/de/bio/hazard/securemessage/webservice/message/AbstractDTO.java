@@ -33,7 +33,9 @@ import javax.xml.bind.annotation.XmlType;
     "tokenId"
 })
 @XmlSeeAlso({
-    MessageWebserviceDTO.class
+    MessageWebserviceDTO.class,
+    RequestMessageWebserviceDTO.class,
+    RequestMessageWebserviceReturnDTO.class
 })
 public class AbstractDTO {
 

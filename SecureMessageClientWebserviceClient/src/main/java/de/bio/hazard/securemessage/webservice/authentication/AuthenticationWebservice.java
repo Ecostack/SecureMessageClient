@@ -62,8 +62,8 @@ public interface AuthenticationWebservice {
      * @param arg0
      * @return
      *     returns de.bio.hazard.securemessage.webservice.authentication.AuthenticationStepOneReturnDTO
-     * @throws EncryptionExceptionBiohazard_Exception
      * @throws DeviceNotFoundException_Exception
+     * @throws EncryptionExceptionBiohazard_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")

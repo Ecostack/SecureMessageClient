@@ -24,8 +24,10 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _GetMessagesResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "getMessagesResponse");
     private final static QName _AddMessageResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "addMessageResponse");
     private final static QName _AddMessage_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "addMessage");
+    private final static QName _GetMessages_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "getMessages");
     private final static QName _EncryptionExceptionBiohazard_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "EncryptionExceptionBiohazard");
 
     /**
@@ -33,6 +35,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link GetMessagesResponse }
+     * 
+     */
+    public GetMessagesResponse createGetMessagesResponse() {
+        return new GetMessagesResponse();
     }
 
     /**
@@ -60,6 +70,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetMessages }
+     * 
+     */
+    public GetMessages createGetMessages() {
+        return new GetMessages();
+    }
+
+    /**
      * Create an instance of {@link MessageReceiverWebserviceDTO }
      * 
      */
@@ -84,6 +102,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link RequestMessageWebserviceDTO }
+     * 
+     */
+    public RequestMessageWebserviceDTO createRequestMessageWebserviceDTO() {
+        return new RequestMessageWebserviceDTO();
+    }
+
+    /**
      * Create an instance of {@link MessageContentKeyWebserviceDTO }
      * 
      */
@@ -92,11 +118,28 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link RequestMessageWebserviceReturnDTO }
+     * 
+     */
+    public RequestMessageWebserviceReturnDTO createRequestMessageWebserviceReturnDTO() {
+        return new RequestMessageWebserviceReturnDTO();
+    }
+
+    /**
      * Create an instance of {@link AbstractDTO }
      * 
      */
     public AbstractDTO createAbstractDTO() {
         return new AbstractDTO();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetMessagesResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "getMessagesResponse")
+    public JAXBElement<GetMessagesResponse> createGetMessagesResponse(GetMessagesResponse value) {
+        return new JAXBElement<GetMessagesResponse>(_GetMessagesResponse_QNAME, GetMessagesResponse.class, null, value);
     }
 
     /**
@@ -115,6 +158,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "addMessage")
     public JAXBElement<AddMessage> createAddMessage(AddMessage value) {
         return new JAXBElement<AddMessage>(_AddMessage_QNAME, AddMessage.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetMessages }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "getMessages")
+    public JAXBElement<GetMessages> createGetMessages(GetMessages value) {
+        return new JAXBElement<GetMessages>(_GetMessages_QNAME, GetMessages.class, null, value);
     }
 
     /**
