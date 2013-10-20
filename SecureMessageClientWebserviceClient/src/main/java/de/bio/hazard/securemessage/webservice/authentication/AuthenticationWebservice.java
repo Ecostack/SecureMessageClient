@@ -86,6 +86,7 @@ public interface AuthenticationWebservice {
      * 
      * @param arg0
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @return
      *     returns de.bio.hazard.securemessage.webservice.authentication.AuthenticationStepOneReturnDTO
      * @throws DeviceNotFoundException_Exception
@@ -110,6 +111,8 @@ public interface AuthenticationWebservice {
      * @param arg0
      * @return
      *     returns de.bio.hazard.securemessage.webservice.authentication.AuthenticationStepTwoReturnDTO
+=======
+>>>>>>> refs/remotes/origin/development
 =======
 >>>>>>> refs/remotes/origin/development
      * @throws EncryptionExceptionBiohazard_Exception
