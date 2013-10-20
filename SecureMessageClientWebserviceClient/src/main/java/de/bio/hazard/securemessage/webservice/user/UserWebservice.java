@@ -29,6 +29,21 @@ public interface UserWebservice {
      * 
      * @param arg0
      * @return
+     *     returns de.bio.hazard.securemessage.webservice.user.UserListWebserviceReturnDTO
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getUsers", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.user.GetUsers")
+    @ResponseWrapper(localName = "getUsersResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.user.GetUsersResponse")
+    @Action(input = "http://webservice.securemessage.hazard.bio.de/UserWebservice/getUsersRequest", output = "http://webservice.securemessage.hazard.bio.de/UserWebservice/getUsersResponse")
+    public UserListWebserviceReturnDTO getUsers(
+        @WebParam(name = "arg0", targetNamespace = "")
+        UserListWebserviceDTO arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns de.bio.hazard.securemessage.webservice.user.UserWebserviceReturnDTO
      * @throws UserNotFoundException_Exception
      */

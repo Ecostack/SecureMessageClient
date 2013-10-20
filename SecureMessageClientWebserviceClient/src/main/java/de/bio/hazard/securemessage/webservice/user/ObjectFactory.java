@@ -25,14 +25,24 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _GetPublicKeyByUsernameResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "getPublicKeyByUsernameResponse");
+    private final static QName _GetUsersResponse_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "getUsersResponse");
     private final static QName _UserNotFoundException_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "UserNotFoundException");
     private final static QName _GetPublicKeyByUsername_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "getPublicKeyByUsername");
+    private final static QName _GetUsers_QNAME = new QName("http://webservice.securemessage.hazard.bio.de/", "getUsers");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: de.bio.hazard.securemessage.webservice.user
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link GetUsersResponse }
+     * 
+     */
+    public GetUsersResponse createGetUsersResponse() {
+        return new GetUsersResponse();
     }
 
     /**
@@ -60,6 +70,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetUsers }
+     * 
+     */
+    public GetUsers createGetUsers() {
+        return new GetUsers();
+    }
+
+    /**
+     * Create an instance of {@link UserListItemWebserviceReturnDTO }
+     * 
+     */
+    public UserListItemWebserviceReturnDTO createUserListItemWebserviceReturnDTO() {
+        return new UserListItemWebserviceReturnDTO();
+    }
+
+    /**
      * Create an instance of {@link UserWebserviceDTO }
      * 
      */
@@ -68,11 +94,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link UserListWebserviceDTO }
+     * 
+     */
+    public UserListWebserviceDTO createUserListWebserviceDTO() {
+        return new UserListWebserviceDTO();
+    }
+
+    /**
      * Create an instance of {@link UserWebserviceReturnDTO }
      * 
      */
     public UserWebserviceReturnDTO createUserWebserviceReturnDTO() {
         return new UserWebserviceReturnDTO();
+    }
+
+    /**
+     * Create an instance of {@link UserListWebserviceReturnDTO }
+     * 
+     */
+    public UserListWebserviceReturnDTO createUserListWebserviceReturnDTO() {
+        return new UserListWebserviceReturnDTO();
     }
 
     /**
@@ -93,6 +135,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUsersResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "getUsersResponse")
+    public JAXBElement<GetUsersResponse> createGetUsersResponse(GetUsersResponse value) {
+        return new JAXBElement<GetUsersResponse>(_GetUsersResponse_QNAME, GetUsersResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link UserNotFoundException }{@code >}}
      * 
      */
@@ -108,6 +159,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "getPublicKeyByUsername")
     public JAXBElement<GetPublicKeyByUsername> createGetPublicKeyByUsername(GetPublicKeyByUsername value) {
         return new JAXBElement<GetPublicKeyByUsername>(_GetPublicKeyByUsername_QNAME, GetPublicKeyByUsername.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUsers }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.securemessage.hazard.bio.de/", name = "getUsers")
+    public JAXBElement<GetUsers> createGetUsers(GetUsers value) {
+        return new JAXBElement<GetUsers>(_GetUsers_QNAME, GetUsers.class, null, value);
     }
 
 }
