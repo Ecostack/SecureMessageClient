@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="serverPublicKey" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
+ *         &lt;element name="serverPublicKeyAsBase64" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,32 +27,34 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "serverPublicKeyDTO", propOrder = {
-    "serverPublicKey"
+    "serverPublicKeyAsBase64"
 })
 public class ServerPublicKeyDTO {
 
-    protected byte[] serverPublicKey;
+    protected String serverPublicKeyAsBase64;
 
     /**
-     * Gets the value of the serverPublicKey property.
+     * Gets the value of the serverPublicKeyAsBase64 property.
      * 
      * @return
      *     possible object is
-     *     byte[]
+     *     {@link String }
+     *     
      */
-    public byte[] getServerPublicKey() {
-        return serverPublicKey;
+    public String getServerPublicKeyAsBase64() {
+        return serverPublicKeyAsBase64;
     }
 
     /**
-     * Sets the value of the serverPublicKey property.
+     * Sets the value of the serverPublicKeyAsBase64 property.
      * 
      * @param value
      *     allowed object is
-     *     byte[]
+     *     {@link String }
+     *     
      */
-    public void setServerPublicKey(byte[] value) {
-        this.serverPublicKey = value;
+    public void setServerPublicKeyAsBase64(String value) {
+        this.serverPublicKeyAsBase64 = value;
     }
 
 }

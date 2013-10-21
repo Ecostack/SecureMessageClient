@@ -1,5 +1,6 @@
 package de.bio.hazard.securemessage.client.service;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -94,7 +95,7 @@ public class AuthenticationService {
 	}
 
 	private AuthenticationKeyHelper createAuthenticationKeyHelper(
-			byte[] pDevicePrivateKey) {
+			byte[] pDevicePrivateKey) throws IOException {
 		AuthenticationKeyHelper lcResult = new AuthenticationKeyHelper();
 		lcResult.setDevicePrivateKey(pDevicePrivateKey);
 		lcResult.setServerPublicKey(basisInfoService.getServerPublicKey());

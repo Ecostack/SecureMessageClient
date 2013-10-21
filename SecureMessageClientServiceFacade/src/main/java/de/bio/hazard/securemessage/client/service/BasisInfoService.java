@@ -1,5 +1,7 @@
 package de.bio.hazard.securemessage.client.service;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +16,20 @@ public class BasisInfoService {
 
 	private byte[] serverPublicKey = null;
 
-	public byte[] getServerPublicKey() {
+	public byte[] getServerPublicKey() throws IOException {
 		if (serverPublicKey == null) {
 			serverPublicKey = basisInfoServiceFacade.getServerPublicKey();
 		}
 		return serverPublicKey;
+	}
+
+	public BasisInfoServiceFacade getBasisInfoServiceFacade() {
+		return basisInfoServiceFacade;
+	}
+
+	public void setBasisInfoServiceFacade(
+			BasisInfoServiceFacade basisInfoServiceFacade) {
+		this.basisInfoServiceFacade = basisInfoServiceFacade;
 	}
 
 }

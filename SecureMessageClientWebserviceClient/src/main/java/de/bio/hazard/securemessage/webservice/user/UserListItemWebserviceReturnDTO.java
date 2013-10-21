@@ -19,7 +19,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="lastLoginAt" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
- *         &lt;element name="publicKeyForMessaging" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
+ *         &lt;element name="publicKeyForMessagingAsBase64" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -32,14 +32,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "userListItemWebserviceReturnDTO", propOrder = {
     "lastLoginAt",
-    "publicKeyForMessaging",
+    "publicKeyForMessagingAsBase64",
     "username"
 })
 public class UserListItemWebserviceReturnDTO {
 
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar lastLoginAt;
-    protected byte[] publicKeyForMessaging;
+    protected String publicKeyForMessagingAsBase64;
     protected String username;
 
     /**
@@ -67,25 +67,27 @@ public class UserListItemWebserviceReturnDTO {
     }
 
     /**
-     * Gets the value of the publicKeyForMessaging property.
+     * Gets the value of the publicKeyForMessagingAsBase64 property.
      * 
      * @return
      *     possible object is
-     *     byte[]
+     *     {@link String }
+     *     
      */
-    public byte[] getPublicKeyForMessaging() {
-        return publicKeyForMessaging;
+    public String getPublicKeyForMessagingAsBase64() {
+        return publicKeyForMessagingAsBase64;
     }
 
     /**
-     * Sets the value of the publicKeyForMessaging property.
+     * Sets the value of the publicKeyForMessagingAsBase64 property.
      * 
      * @param value
      *     allowed object is
-     *     byte[]
+     *     {@link String }
+     *     
      */
-    public void setPublicKeyForMessaging(byte[] value) {
-        this.publicKeyForMessaging = value;
+    public void setPublicKeyForMessagingAsBase64(String value) {
+        this.publicKeyForMessagingAsBase64 = value;
     }
 
     /**

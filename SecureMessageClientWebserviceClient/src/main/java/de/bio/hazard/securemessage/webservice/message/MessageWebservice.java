@@ -28,23 +28,6 @@ public interface MessageWebservice {
     /**
      * 
      * @param arg0
-     * @throws EncryptionExceptionBiohazard_Exception
-     */
-    @WebMethod
-    @RequestWrapper(localName = "addMessage", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.message.AddMessage")
-    @ResponseWrapper(localName = "addMessageResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.message.AddMessageResponse")
-    @Action(input = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessageRequest", output = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessageResponse", fault = {
-        @FaultAction(className = EncryptionExceptionBiohazard_Exception.class, value = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessage/Fault/EncryptionExceptionBiohazard")
-    })
-    public void addMessage(
-        @WebParam(name = "arg0", targetNamespace = "")
-        MessageWebserviceDTO arg0)
-        throws EncryptionExceptionBiohazard_Exception
-    ;
-
-    /**
-     * 
-     * @param arg0
      * @return
      *     returns de.bio.hazard.securemessage.webservice.message.RequestMessageWebserviceReturnDTO
      * @throws EncryptionExceptionBiohazard_Exception
@@ -59,6 +42,23 @@ public interface MessageWebservice {
     public RequestMessageWebserviceReturnDTO getMessages(
         @WebParam(name = "arg0", targetNamespace = "")
         RequestMessageWebserviceDTO arg0)
+        throws EncryptionExceptionBiohazard_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @throws EncryptionExceptionBiohazard_Exception
+     */
+    @WebMethod
+    @RequestWrapper(localName = "addMessage", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.message.AddMessage")
+    @ResponseWrapper(localName = "addMessageResponse", targetNamespace = "http://webservice.securemessage.hazard.bio.de/", className = "de.bio.hazard.securemessage.webservice.message.AddMessageResponse")
+    @Action(input = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessageRequest", output = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessageResponse", fault = {
+        @FaultAction(className = EncryptionExceptionBiohazard_Exception.class, value = "http://webservice.securemessage.hazard.bio.de/MessageWebservice/addMessage/Fault/EncryptionExceptionBiohazard")
+    })
+    public void addMessage(
+        @WebParam(name = "arg0", targetNamespace = "")
+        MessageWebserviceDTO arg0)
         throws EncryptionExceptionBiohazard_Exception
     ;
 

@@ -1,5 +1,6 @@
 package de.bio.hazard.securemessage.client.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -43,7 +44,7 @@ public class Global {
 			AuthenticationService pAuthenticationService,
 			UserService pUserService,
 			MessageService pMessageService,
-			AsymmetricKeygen pAsymmetricKeygen) {
+			AsymmetricKeygen pAsymmetricKeygen) throws IOException {
 		authenticationService = pAuthenticationService;
 		basisInfoService = pBasisInfoService;
 		asymmetricKeygen = pAsymmetricKeygen;
@@ -92,7 +93,8 @@ public class Global {
 	}
 	
 	
-	public void completeMessageTest() throws MessageExceptionBiohazard {
+	public void completeMessageTest() throws MessageExceptionBiohazard, IOException {
+		Logger lcLogger = LoggerFactory.getLogger(this.getClass());
 	    byte[] lcServerPublicKey = basisInfoService.getServerPublicKey();
 
 		// --------------TESTUSER---------------------------------------
@@ -217,6 +219,8 @@ public class Global {
 		messageService.sendMessage(lcMessage, lcCommunicationKeyHelperUser1);
 
 		// --------------MESSAGE EMPFANGEN---------------------------------------
+		lcLogger.error("Start receiving messages");
+
 
 		CommunicationKeyHelper lcCommunicationKeyHelperUser3 = new CommunicationKeyHelper();
 		lcCommunicationKeyHelperUser3.setDevicePrivateKey(lcKeyPairUser3Device.getPrivateKey());
@@ -228,9 +232,12 @@ public class Global {
 		
 		for(Message lcMessageReturn : lcReturn) {
 		    for(MessageContent lcMessageContentReturn : lcMessageReturn.getContent()) {
-			System.err.println(lcMessageContentReturn.getData());
+		    	lcLogger.error("Messagedata : " +lcMessageContentReturn.getData());
 		    }
 		}
+		
+		lcLogger.error("Stop receiving messages");
+
 	}
 	
 
