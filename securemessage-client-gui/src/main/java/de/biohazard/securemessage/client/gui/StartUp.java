@@ -8,7 +8,7 @@ public class StartUp {
 	ApplicationContext lcContext = null;
 
 	public static void main(String[] pStrings) {
-		StartUp lcStartUp = new StartUp();
+		new StartUp();
 	}
 
 	public StartUp() {
