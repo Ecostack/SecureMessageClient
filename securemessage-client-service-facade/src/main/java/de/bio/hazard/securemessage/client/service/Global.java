@@ -42,8 +42,7 @@ public class Global {
 	@Autowired
 	public Global(BasisInfoService pBasisInfoService,
 			AuthenticationService pAuthenticationService,
-			UserService pUserService,
-			MessageService pMessageService,
+			UserService pUserService, MessageService pMessageService,
 			AsymmetricKeygen pAsymmetricKeygen) throws IOException {
 		authenticationService = pAuthenticationService;
 		basisInfoService = pBasisInfoService;
@@ -54,7 +53,7 @@ public class Global {
 		keyPairDevice = asymmetricKeygen.getKey(1024);
 
 		System.err.println("START GLOBAL");
-		
+
 		serverPublicKey = basisInfoService.getServerPublicKey();
 		logger.debug("obtained public key of server");
 
@@ -73,31 +72,32 @@ public class Global {
 						lcUser.getUsername(), lcUser.getPassword(),
 						keyPairDevice.getPrivateKey());
 		System.err.println("TokenId: " + lcTokenId);
-		
+
 		System.err.println("Start send Message");
 		Message lcMessage = createMessage();
-		
+
 		try {
-		    messageService.sendMessage(lcMessage, getMessageKeyHelper(lcTokenId, keyPairMessaging.getPrivateKey()));
+			messageService.sendMessage(
+					lcMessage,
+					getMessageKeyHelper(lcTokenId,
+							keyPairMessaging.getPrivateKey()));
+		} catch (MessageExceptionBiohazard e) {
+			e.printStackTrace();
 		}
-		catch (MessageExceptionBiohazard e) {
-		    e.printStackTrace();
-		}
-		System.err.println("End send Message");		
-		
+		System.err.println("End send Message");
+
 		try {
-		    completeMessageTest();
-		}
-		catch (MessageExceptionBiohazard e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
+			completeMessageTest();
+		} catch (MessageExceptionBiohazard e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
-	
-	
-	public void completeMessageTest() throws MessageExceptionBiohazard, IOException {
+
+	public void completeMessageTest() throws MessageExceptionBiohazard,
+			IOException {
 		Logger lcLogger = LoggerFactory.getLogger(this.getClass());
-	    byte[] lcServerPublicKey = basisInfoService.getServerPublicKey();
+		byte[] lcServerPublicKey = basisInfoService.getServerPublicKey();
 
 		// --------------TESTUSER---------------------------------------
 
@@ -112,8 +112,10 @@ public class Global {
 		lcUser1.setUsername("TestMessagingUser1");
 		lcUser1.setPublicKeyForMessaging(lcKeyPairUser1.getPublicKey());
 		NewUserKeyHelper lcUserKeyHelper1 = new NewUserKeyHelper();
-		lcUserKeyHelper1.setDevicePrivateKey(lcKeyPairUser1Device.getPrivateKey());
-		lcUserKeyHelper1.setPublicKeyForMessaging(lcKeyPairUser1.getPublicKey());
+		lcUserKeyHelper1.setDevicePrivateKey(lcKeyPairUser1Device
+				.getPrivateKey());
+		lcUserKeyHelper1
+				.setPublicKeyForMessaging(lcKeyPairUser1.getPublicKey());
 		lcUserKeyHelper1.setServerPublicKey(lcServerPublicKey);
 
 		AsymmetricKey lcKeyPairUser2 = asymmetricKeygen.getKey(1024);
@@ -127,8 +129,10 @@ public class Global {
 		lcUser2.setUsername("TestMessagingUser2");
 		lcUser2.setPublicKeyForMessaging(lcKeyPairUser2.getPublicKey());
 		NewUserKeyHelper lcUserKeyHelper2 = new NewUserKeyHelper();
-		lcUserKeyHelper2.setDevicePrivateKey(lcKeyPairUser2Device.getPrivateKey());
-		lcUserKeyHelper2.setPublicKeyForMessaging(lcKeyPairUser2.getPublicKey());
+		lcUserKeyHelper2.setDevicePrivateKey(lcKeyPairUser2Device
+				.getPrivateKey());
+		lcUserKeyHelper2
+				.setPublicKeyForMessaging(lcKeyPairUser2.getPublicKey());
 		lcUserKeyHelper2.setServerPublicKey(lcServerPublicKey);
 
 		AsymmetricKey lcKeyPairUser3 = asymmetricKeygen.getKey(1024);
@@ -142,8 +146,10 @@ public class Global {
 		lcUser3.setUsername("TestMessagingUser3");
 		lcUser3.setPublicKeyForMessaging(lcKeyPairUser3.getPublicKey());
 		NewUserKeyHelper lcUserKeyHelper3 = new NewUserKeyHelper();
-		lcUserKeyHelper3.setDevicePrivateKey(lcKeyPairUser3Device.getPrivateKey());
-		lcUserKeyHelper3.setPublicKeyForMessaging(lcKeyPairUser3.getPublicKey());
+		lcUserKeyHelper3.setDevicePrivateKey(lcKeyPairUser3Device
+				.getPrivateKey());
+		lcUserKeyHelper3
+				.setPublicKeyForMessaging(lcKeyPairUser3.getPublicKey());
 		lcUserKeyHelper3.setServerPublicKey(lcServerPublicKey);
 
 		authenticationService.addNewUser(lcUser1, lcUserKeyHelper1);
@@ -153,39 +159,51 @@ public class Global {
 		// --------------DEVICE---------------------------------------
 
 		NewDeviceKeyHelper lcUserKeyHelper1Device = new NewDeviceKeyHelper();
-		lcUserKeyHelper1Device.setDevicePrivateKey(lcKeyPairUser1Device.getPrivateKey());
-		lcUserKeyHelper1Device.setDevicePublicKey(lcKeyPairUser1Device.getPublicKey());
+		lcUserKeyHelper1Device.setDevicePrivateKey(lcKeyPairUser1Device
+				.getPrivateKey());
+		lcUserKeyHelper1Device.setDevicePublicKey(lcKeyPairUser1Device
+				.getPublicKey());
 		lcUserKeyHelper1Device.setServerPublicKey(lcServerPublicKey);
 
 		NewDeviceWebservice lcNewDevice1 = new NewDeviceWebservice();
 		lcNewDevice1.setPassword(lcUser1.getPassword());
 		lcNewDevice1.setUsername(lcUser1.getUsername());
 		lcNewDevice1.setDevicename("myDeviceUser1");
-		lcNewDevice1.setPublicKeyForDevice(lcUserKeyHelper1Device.getDevicePublicKey());
+		lcNewDevice1.setPublicKeyForDevice(lcUserKeyHelper1Device
+				.getDevicePublicKey());
 
-		NewDeviceWebserviceReturn lcDeviceReturn1 = authenticationService.addNewDevice(lcNewDevice1, lcUserKeyHelper1Device);
+		NewDeviceWebserviceReturn lcDeviceReturn1 = authenticationService
+				.addNewDevice(lcNewDevice1, lcUserKeyHelper1Device);
 
 		NewDeviceKeyHelper lcUserKeyHelper3Device = new NewDeviceKeyHelper();
-		lcUserKeyHelper3Device.setDevicePrivateKey(lcKeyPairUser1Device.getPrivateKey());
-		lcUserKeyHelper3Device.setDevicePublicKey(lcKeyPairUser1Device.getPublicKey());
+		lcUserKeyHelper3Device.setDevicePrivateKey(lcKeyPairUser1Device
+				.getPrivateKey());
+		lcUserKeyHelper3Device.setDevicePublicKey(lcKeyPairUser1Device
+				.getPublicKey());
 		lcUserKeyHelper3Device.setServerPublicKey(lcServerPublicKey);
 
 		NewDeviceWebservice lcNewDevice3 = new NewDeviceWebservice();
 		lcNewDevice3.setPassword(lcUser3.getPassword());
 		lcNewDevice3.setUsername(lcUser3.getUsername());
 		lcNewDevice3.setDevicename("myDeviceUser3");
-		lcNewDevice3.setPublicKeyForDevice(lcUserKeyHelper1Device.getDevicePublicKey());
+		lcNewDevice3.setPublicKeyForDevice(lcUserKeyHelper1Device
+				.getDevicePublicKey());
 
-		NewDeviceWebserviceReturn lcDeviceReturn3 = authenticationService.addNewDevice(lcNewDevice3, lcUserKeyHelper3Device);
+		NewDeviceWebserviceReturn lcDeviceReturn3 = authenticationService
+				.addNewDevice(lcNewDevice3, lcUserKeyHelper3Device);
 
 		// --------------ANMELDUNG---------------------------------------
 
-		String lcTokenIdDevice1 = authenticationService.authenticateAndObtainAuthToken(lcDeviceReturn1.getDeviceId(), lcUser1.getUsername(), lcUser1.getPassword(),
-			lcUserKeyHelper1Device.getDevicePrivateKey());
+		String lcTokenIdDevice1 = authenticationService
+				.authenticateAndObtainAuthToken(lcDeviceReturn1.getDeviceId(),
+						lcUser1.getUsername(), lcUser1.getPassword(),
+						lcUserKeyHelper1Device.getDevicePrivateKey());
 		System.err.println("TokenId Device1: " + lcTokenIdDevice1);
 
-		String lcTokenIdDevice3 = authenticationService.authenticateAndObtainAuthToken(lcDeviceReturn3.getDeviceId(), lcUser3.getUsername(), lcUser3.getPassword(),
-			lcUserKeyHelper3Device.getDevicePrivateKey());
+		String lcTokenIdDevice3 = authenticationService
+				.authenticateAndObtainAuthToken(lcDeviceReturn3.getDeviceId(),
+						lcUser3.getUsername(), lcUser3.getPassword(),
+						lcUserKeyHelper3Device.getDevicePrivateKey());
 		System.err.println("TokenId Device3: " + lcTokenIdDevice3);
 
 		// --------------MESSAGE SENDEN---------------------------------------
@@ -213,75 +231,81 @@ public class Global {
 		lcMessage.getReceiver().add(lcMessageReceiver);
 
 		CommunicationKeyHelper lcCommunicationKeyHelperUser1 = new CommunicationKeyHelper();
-		lcCommunicationKeyHelperUser1.setDevicePrivateKey(lcKeyPairUser1Device.getPrivateKey());
+		lcCommunicationKeyHelperUser1.setDevicePrivateKey(lcKeyPairUser1Device
+				.getPrivateKey());
 		lcCommunicationKeyHelperUser1.setServerPublicKey(lcServerPublicKey);
 		lcCommunicationKeyHelperUser1.setTokenId(lcTokenIdDevice1);
-		lcCommunicationKeyHelperUser1.setUserPrivateKey(lcKeyPairUser1.getPrivateKey());
+		lcCommunicationKeyHelperUser1.setUserPrivateKey(lcKeyPairUser1
+				.getPrivateKey());
 
 		messageService.sendMessage(lcMessage, lcCommunicationKeyHelperUser1);
 
-		// --------------MESSAGE EMPFANGEN---------------------------------------
+		// --------------MESSAGE
+		// EMPFANGEN---------------------------------------
 		lcLogger.error("Start receiving messages");
 
-
 		CommunicationKeyHelper lcCommunicationKeyHelperUser3 = new CommunicationKeyHelper();
-		lcCommunicationKeyHelperUser3.setDevicePrivateKey(lcKeyPairUser3Device.getPrivateKey());
+		lcCommunicationKeyHelperUser3.setDevicePrivateKey(lcKeyPairUser3Device
+				.getPrivateKey());
 		lcCommunicationKeyHelperUser3.setServerPublicKey(lcServerPublicKey);
 		lcCommunicationKeyHelperUser3.setTokenId(lcTokenIdDevice3);
-		lcCommunicationKeyHelperUser3.setUserPrivateKey(lcKeyPairUser3.getPrivateKey());
-		
-		List<Message> lcReturn = messageService.getMessages(lcCommunicationKeyHelperUser3);
-		
-		for(Message lcMessageReturn : lcReturn) {
-		    for(MessageContent lcMessageContentReturn : lcMessageReturn.getContent()) {
-		    	lcLogger.error("Messagedata : " +lcMessageContentReturn.getData());
-		    }
+		lcCommunicationKeyHelperUser3.setUserPrivateKey(lcKeyPairUser3
+				.getPrivateKey());
+
+		List<Message> lcReturn = messageService
+				.getMessages(lcCommunicationKeyHelperUser3);
+
+		for (Message lcMessageReturn : lcReturn) {
+			for (MessageContent lcMessageContentReturn : lcMessageReturn
+					.getContent()) {
+				lcLogger.error("Messagedata : "
+						+ lcMessageContentReturn.getData());
+			}
 		}
-		
+
 		lcLogger.error("Stop receiving messages");
 
 	}
-	
 
 	private Message createMessage() {
-	    Message lcMessage = new Message();
-	    
-	    MessageContent lcMessageContent = new MessageContent();
-	    lcMessageContent.setData("Hallo Welt".getBytes());
-	    lcMessageContent.setFilename("");
-	    lcMessage.getContent().add(lcMessageContent);
-	    
-	    lcMessageContent = new MessageContent();
-	    lcMessageContent.setData("Text 1234".getBytes());
-	    lcMessageContent.setFilename("");
-	    lcMessage.getContent().add(lcMessageContent);
-	    
-	    MessageReceiver lcMessageReceiver = new MessageReceiver();
-	    lcMessageReceiver.setMessageReceiverType(MessageReceiverType.TO);
-	    lcMessageReceiver.setUsername("test");
-	    lcMessage.getReceiver().add(lcMessageReceiver);
-	    
-	    lcMessageReceiver = new MessageReceiver();
-	    lcMessageReceiver.setMessageReceiverType(MessageReceiverType.CC);
-	    lcMessageReceiver.setUsername("Admin");
-	    lcMessage.getReceiver().add(lcMessageReceiver);
-	    
-	    return lcMessage;
+		Message lcMessage = new Message();
+
+		MessageContent lcMessageContent = new MessageContent();
+		lcMessageContent.setData("Hallo Welt".getBytes());
+		lcMessageContent.setFilename("");
+		lcMessage.getContent().add(lcMessageContent);
+
+		lcMessageContent = new MessageContent();
+		lcMessageContent.setData("Text 1234".getBytes());
+		lcMessageContent.setFilename("");
+		lcMessage.getContent().add(lcMessageContent);
+
+		MessageReceiver lcMessageReceiver = new MessageReceiver();
+		lcMessageReceiver.setMessageReceiverType(MessageReceiverType.TO);
+		lcMessageReceiver.setUsername("test");
+		lcMessage.getReceiver().add(lcMessageReceiver);
+
+		lcMessageReceiver = new MessageReceiver();
+		lcMessageReceiver.setMessageReceiverType(MessageReceiverType.CC);
+		lcMessageReceiver.setUsername("Admin");
+		lcMessage.getReceiver().add(lcMessageReceiver);
+
+		return lcMessage;
 	}
 
-	private CommunicationKeyHelper getMessageKeyHelper(String pTokenId, byte[] pUserPrivateKey) {
-	    CommunicationKeyHelper lcKeyHelper = new CommunicationKeyHelper();
-	    lcKeyHelper.setTokenId(pTokenId);
-	    lcKeyHelper.setDevicePrivateKey(keyPairDevice.getPrivateKey());
-	    lcKeyHelper.setServerPublicKey(serverPublicKey);
-	    lcKeyHelper.setUserPrivateKey(pUserPrivateKey);
-	    return lcKeyHelper;
+	private CommunicationKeyHelper getMessageKeyHelper(String pTokenId,
+			byte[] pUserPrivateKey) {
+		CommunicationKeyHelper lcKeyHelper = new CommunicationKeyHelper();
+		lcKeyHelper.setTokenId(pTokenId);
+		lcKeyHelper.setDevicePrivateKey(keyPairDevice.getPrivateKey());
+		lcKeyHelper.setServerPublicKey(serverPublicKey);
+		lcKeyHelper.setUserPrivateKey(pUserPrivateKey);
+		return lcKeyHelper;
 	}
 
 	private NewDeviceKeyHelper getNewDeviceKeyHelper() {
 		NewDeviceKeyHelper lcKeyHelper = new NewDeviceKeyHelper();
-		lcKeyHelper
-				.setDevicePrivateKey(keyPairDevice.getPrivateKey());
+		lcKeyHelper.setDevicePrivateKey(keyPairDevice.getPrivateKey());
 		lcKeyHelper.setDevicePublicKey(keyPairDevice.getPublicKey());
 		lcKeyHelper.setServerPublicKey(serverPublicKey);
 		return lcKeyHelper;
@@ -289,8 +313,7 @@ public class Global {
 
 	private NewUserKeyHelper getNewUserKeyHelper() {
 		NewUserKeyHelper lcKeyHelper = new NewUserKeyHelper();
-		lcKeyHelper
-				.setDevicePrivateKey(keyPairDevice.getPrivateKey());
+		lcKeyHelper.setDevicePrivateKey(keyPairDevice.getPrivateKey());
 		lcKeyHelper.setPublicKeyForMessaging(keyPairMessaging.getPublicKey());
 		lcKeyHelper.setServerPublicKey(serverPublicKey);
 		return lcKeyHelper;

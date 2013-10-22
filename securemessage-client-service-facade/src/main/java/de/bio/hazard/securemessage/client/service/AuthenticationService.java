@@ -40,7 +40,7 @@ public class AuthenticationService {
 	public NewDeviceWebserviceReturn addNewDevice(
 			NewDeviceWebservice pNewDeviceWebservice,
 			NewDeviceKeyHelper pKeyHelper) {
-		
+
 		pKeyHelper.setDevicePublicKey(pNewDeviceWebservice
 				.getPublicKeyForDevice());
 		try {
@@ -54,7 +54,7 @@ public class AuthenticationService {
 
 	public void addNewUser(NewUserWebservice pNewUserWebservice,
 			NewUserKeyHelper pKeyHelper) {
-		
+
 		pKeyHelper.setPublicKeyForMessaging(pNewUserWebservice
 				.getPublicKeyForMessaging());
 		try {

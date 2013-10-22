@@ -5,11 +5,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.List;
 
-import org.junit.Test;
+import junit.framework.TestCase;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import junit.framework.TestCase;
 import de.bio.hazard.securemessage.client.service.AuthenticationService;
 import de.bio.hazard.securemessage.client.service.BasisInfoService;
 import de.bio.hazard.securemessage.client.service.MessageService;

@@ -12,22 +12,23 @@ import de.bio.hazard.securemessage.webservice.user.UserNotFoundException_Excepti
 @Service
 public class UserService {
 
-    @Autowired
-    private UserServiceFacade userServiceFacade;
+	@Autowired
+	private UserServiceFacade userServiceFacade;
 
-    public byte[] getServerPublicKey(String pUsername, CommunicationKeyHelper pCommunicationKey) throws UserExceptionBiohazard {
-	try {
-	    return userServiceFacade.getPublicKeyByUsername(pUsername, pCommunicationKey);
+	public byte[] getServerPublicKey(String pUsername,
+			CommunicationKeyHelper pCommunicationKey)
+			throws UserExceptionBiohazard {
+		try {
+			return userServiceFacade.getPublicKeyByUsername(pUsername,
+					pCommunicationKey);
+		} catch (EncryptionExceptionBiohazard e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new UserExceptionBiohazard();
+		} catch (UserNotFoundException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new UserExceptionBiohazard();
+		}
 	}
-	catch (EncryptionExceptionBiohazard e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	    throw new UserExceptionBiohazard();
-	}
-	catch (UserNotFoundException_Exception e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	    throw new UserExceptionBiohazard();
-	}
-    }
 }

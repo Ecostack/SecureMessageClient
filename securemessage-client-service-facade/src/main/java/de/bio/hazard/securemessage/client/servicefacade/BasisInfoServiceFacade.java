@@ -1,7 +1,6 @@
 package de.bio.hazard.securemessage.client.servicefacade;
 
 import java.io.IOException;
-import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,16 +15,16 @@ public class BasisInfoServiceFacade {
 
 	private BasisInfoWebservice basisWSPort;
 	private BasisInfoWebserviceService basisWS;
-	
+
 	@Autowired
 	EncryptionObjectModifier encryptionObjectModifier;
 
 	public byte[] getServerPublicKey() throws IOException {
 
 		ServerPublicKeyDTO lcSPKDTO = getBasisWSPort().getServerPublicKey();
-		
-		
-		return encryptionObjectModifier.decodeBase64ToByte(lcSPKDTO.getServerPublicKeyAsBase64());
+
+		return encryptionObjectModifier.decodeBase64ToByte(lcSPKDTO
+				.getServerPublicKeyAsBase64());
 	}
 
 	private BasisInfoWebservice getBasisWSPort() {

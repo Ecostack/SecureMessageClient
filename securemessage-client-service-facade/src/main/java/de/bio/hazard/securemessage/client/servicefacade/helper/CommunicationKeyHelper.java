@@ -2,22 +2,22 @@ package de.bio.hazard.securemessage.client.servicefacade.helper;
 
 public class CommunicationKeyHelper extends KeyHelper {
 
-    private String tokenId;
-    private byte[] userPrivateKey;
-    
-    public String getTokenId() {
-	return tokenId;
-    }
+	private String tokenId;
+	private byte[] userPrivateKey;
 
-    public void setTokenId(String tokenId) {
-        this.tokenId = tokenId;
-    }
+	public String getTokenId() {
+		return tokenId;
+	}
 
-    public byte[] getUserPrivateKey() {
-        return userPrivateKey;
-    }
+	public void setTokenId(String tokenId) {
+		this.tokenId = tokenId;
+	}
 
-    public void setUserPrivateKey(byte[] userPrivateKey) {
-        this.userPrivateKey = userPrivateKey;
-    }
+	public byte[] getUserPrivateKey() {
+		return userPrivateKey;
+	}
+
+	public void setUserPrivateKey(byte[] userPrivateKey) {
+		this.userPrivateKey = userPrivateKey;
+	}
 }

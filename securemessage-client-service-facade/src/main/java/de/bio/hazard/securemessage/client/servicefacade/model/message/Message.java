@@ -5,21 +5,21 @@ import java.util.List;
 
 public class Message {
 
-    private List<MessageContent> content;
+	private List<MessageContent> content;
 
-    private List<MessageReceiver> receiver;
+	private List<MessageReceiver> receiver;
 
-    public List<MessageReceiver> getReceiver() {
-	if (receiver == null) {
-	    receiver = new ArrayList<MessageReceiver>();
+	public List<MessageReceiver> getReceiver() {
+		if (receiver == null) {
+			receiver = new ArrayList<MessageReceiver>();
+		}
+		return receiver;
 	}
-	return receiver;
-    }
 
-    public List<MessageContent> getContent() {
-	if (content == null) {
-	    content = new ArrayList<MessageContent>();
+	public List<MessageContent> getContent() {
+		if (content == null) {
+			content = new ArrayList<MessageContent>();
+		}
+		return content;
 	}
-	return content;
-    }
 }

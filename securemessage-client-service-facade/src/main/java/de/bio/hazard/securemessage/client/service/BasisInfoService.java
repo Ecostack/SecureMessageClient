@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.bio.hazard.securemessage.client.servicefacade.AuthenticationServiceFacade;
 import de.bio.hazard.securemessage.client.servicefacade.BasisInfoServiceFacade;
 
 @Service
