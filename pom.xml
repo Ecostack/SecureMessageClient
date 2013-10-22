@@ -15,14 +15,14 @@
 	</properties>
 
 	<groupId>de.bio-hazard</groupId>
-	<artifactId>SecureMessageClient</artifactId>
+	<artifactId>securemessage-client</artifactId>
 	<version>${app.version}</version>
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>SecureMessageClientWebserviceClient</module>
-		<module>SecureMessageClientServiceFacade</module>
-		<module>SecureMessageClientGui</module>
+		<module>securemessage-client-webservice-client</module>
+		<module>securemessage-client-service-facade</module>
+		<module>securemessage-client-gui</module>
 	</modules>
 
 	<dependencies>

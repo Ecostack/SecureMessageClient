@@ -4,7 +4,7 @@
 
 	<parent>
 		<groupId>de.bio-hazard</groupId>
-		<artifactId>SecureMessageClient</artifactId>
+		<artifactId>securemessage-client</artifactId>
 		<version>${app.version}</version>
 		<relativePath>..</relativePath>
 	</parent>
