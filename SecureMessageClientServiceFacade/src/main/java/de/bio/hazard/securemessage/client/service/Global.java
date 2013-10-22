@@ -53,6 +53,8 @@ public class Global {
 		keyPairMessaging = asymmetricKeygen.getKey(1024);
 		keyPairDevice = asymmetricKeygen.getKey(1024);
 
+		System.err.println("START GLOBAL");
+		
 		serverPublicKey = basisInfoService.getServerPublicKey();
 		logger.debug("obtained public key of server");
 

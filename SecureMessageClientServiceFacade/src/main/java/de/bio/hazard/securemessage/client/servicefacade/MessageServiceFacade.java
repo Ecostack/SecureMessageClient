@@ -76,6 +76,8 @@ public class MessageServiceFacade {
 	    throws EncryptionExceptionBiohazard {
 	RequestMessageWebserviceReturnDTO lcRequestMessageWebserviceReturnDTO = pRequestMessageWebserviceReturnDTO;
 	try {
+	    //TODO NicoH; DEBUG!
+	    System.err.println("encryptedKey: "+lcRequestMessageWebserviceReturnDTO.getSymEncryptionKey());
 	    byte[] lcSymmetricKey = encryptionObjectModifier.asymmetricDecryptToByte(lcRequestMessageWebserviceReturnDTO.getSymEncryptionKey(), pCommunicationKey.getDevicePrivateKey(), true);
 
 	    for (MessageWebserviceDTO lcMessage : lcRequestMessageWebserviceReturnDTO.getMessages()) {

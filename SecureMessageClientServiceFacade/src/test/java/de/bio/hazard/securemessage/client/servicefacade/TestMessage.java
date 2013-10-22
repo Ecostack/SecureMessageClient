@@ -192,8 +192,7 @@ public class TestMessage extends TestCase {
 
 		messageService.sendMessage(lcMessage, lcCommunicationKeyHelperUser1);
 
-		// --------------MESSAGE
-		// EMPFANGEN---------------------------------------
+		// --------------MESSAGE EMPFANGEN---------------------------
 
 		CommunicationKeyHelper lcCommunicationKeyHelperUser3 = new CommunicationKeyHelper();
 		lcCommunicationKeyHelperUser3.setDevicePrivateKey(lcKeyPairUser3Device
