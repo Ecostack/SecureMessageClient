@@ -8,12 +8,12 @@
 		<version>${app.version}</version>
 		<relativePath>..</relativePath>
 	</parent>
-	<artifactId>SecureMessageClientGui</artifactId>
+	<artifactId>securemessage-client-gui</artifactId>
 
 	<dependencies>
 		<dependency>
 			<groupId>de.bio-hazard</groupId>
-			<artifactId>SecureMessageClientServiceFacade</artifactId>
+			<artifactId>securemessage-client-service-facade</artifactId>
 		</dependency>
 	</dependencies>
 </project>

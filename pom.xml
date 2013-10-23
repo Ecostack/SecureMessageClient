@@ -20,7 +20,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>securemessage-client-webservice-client</module>
+		<module>securemessage-webservice-client</module>
 		<module>securemessage-client-service-facade</module>
 		<module>securemessage-client-gui</module>
 	</modules>
@@ -60,25 +60,25 @@
 
 			<dependency>
 				<groupId>de.bio-hazard</groupId>
-				<artifactId>SecureMessageTecFramework</artifactId>
+				<artifactId>securemessage-tec-framework</artifactId>
 				<version>${tecframework.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.bio-hazard</groupId>
-				<artifactId>SecureMessageClientWebserviceClient</artifactId>
+				<artifactId>securemessage-webservice-client</artifactId>
 				<version>${app.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.bio-hazard</groupId>
-				<artifactId>SecureMessageClientServiceFacade</artifactId>
+				<artifactId>securemessage-client-service-facade</artifactId>
 				<version>${app.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.bio-hazard</groupId>
-				<artifactId>SecureMessageClientGui</artifactId>
+				<artifactId>securemessage-client-gui</artifactId>
 				<version>${app.version}</version>
 			</dependency>
 

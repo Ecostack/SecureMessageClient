@@ -1,5 +1,8 @@
 package de.bio.hazard.securemessage.webserviceclient.test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,7 +14,8 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import junit.framework.TestCase;
+import org.junit.BeforeClass;
+
 import de.bio.hazard.securemessage.tecframework.encryption.facade.helper.EncryptionObjectModifier;
 import de.bio.hazard.securemessage.tecframework.encryption.symmetric.SymmetricKeygen;
 import de.bio.hazard.securemessage.webservice.authentication.AuthenticationWebservice;
@@ -21,40 +25,18 @@ import de.bio.hazard.securemessage.webservice.authentication.NewUserWebserviceDT
 import de.bio.hazard.securemessage.webservice.basisinfo.BasisInfoWebservice;
 import de.bio.hazard.securemessage.webservice.basisinfo.BasisInfoWebserviceService;
 import de.bio.hazard.securemessage.webservice.basisinfo.ServerPublicKeyDTO;
-import de.bio.hazard.securemessage.webservice.message.MessageWebservice;
-import de.bio.hazard.securemessage.webservice.message.MessageWebserviceDTO;
-import de.bio.hazard.securemessage.webservice.message.MessageWebserviceService;
 
-public class TestWerbservice extends TestCase {
+public class TestWerbservice {
 
-	// public void testMessage() {
-	// try {
-	// MessageWebserviceService lcEndpointService = new
-	// MessageWebserviceService(new
-	// URL("http://localhost:8080/messageWebservice"));
-	//
-	// MessageWebservice lcEndpoint =
-	// lcEndpointService.getMessageWebservicePort();
-	//
-	// MessageWebserviceDTO lcMessageWebserviceDTO = new MessageWebserviceDTO();
-	// lcMessageWebserviceDTO.setMessageText("Mein Text vom WS");
-	// lcMessageWebserviceDTO.setSubject("Mein Subject vom WS");
-	//
-	// lcEndpoint.addMessage(lcMessageWebserviceDTO);
-	// }
-	// catch (Exception e) {
-	// e.printStackTrace();
-	// assertTrue(false);
-	// }
-	// }
+	private static EncryptionObjectModifier encryptionObjectModifier;
 
-	EncryptionObjectModifier encryptionObjectModifier;
-
-	public void setUp() throws NoSuchAlgorithmException,
+	@BeforeClass
+	public static void setUp() throws NoSuchAlgorithmException,
 			NoSuchProviderException, NoSuchPaddingException {
 		encryptionObjectModifier = new EncryptionObjectModifier();
 	}
 
+	// @Test
 	public void testBasisInfo() {
 		try {
 			ServerPublicKeyDTO lcSPKDTO = getServerPublicKey();
@@ -67,18 +49,7 @@ public class TestWerbservice extends TestCase {
 		}
 	}
 
-	private ServerPublicKeyDTO getServerPublicKey()
-			throws MalformedURLException {
-		BasisInfoWebserviceService lcEndpointService = new BasisInfoWebserviceService(
-				new URL("http://localhost:8080/basisInfoWebservice"));
-
-		BasisInfoWebservice lcEndpoint = lcEndpointService
-				.getBasisInfoWebservicePort();
-
-		ServerPublicKeyDTO lcSPKDTO = lcEndpoint.getServerPublicKey();
-		return lcSPKDTO;
-	}
-
+	// @Test
 	public void testAuthNewUserFail() {
 		try {
 			AuthenticationWebserviceService lcEndpointService = new AuthenticationWebserviceService(
@@ -99,6 +70,7 @@ public class TestWerbservice extends TestCase {
 		}
 	}
 
+	// @Test
 	public void testAuthNewUserCorrect() {
 		try {
 			AuthenticationWebserviceService lcEndpointService = new AuthenticationWebserviceService(
@@ -125,6 +97,7 @@ public class TestWerbservice extends TestCase {
 		}
 	}
 
+	// @Test
 	public void testAuthNewUserDoubleFail() {
 		try {
 			AuthenticationWebserviceService lcEndpointService = new AuthenticationWebserviceService(
@@ -154,6 +127,7 @@ public class TestWerbservice extends TestCase {
 		}
 	}
 
+	// @Test
 	public void testAuthNewUserWithDevice() {
 		try {
 			AuthenticationWebserviceService lcEndpointService = new AuthenticationWebserviceService(
@@ -189,6 +163,7 @@ public class TestWerbservice extends TestCase {
 		}
 	}
 
+	// @Test
 	public void testAuthNewUserWithTwoDevices() {
 		try {
 			AuthenticationWebserviceService lcEndpointService = new AuthenticationWebserviceService(
@@ -279,4 +254,15 @@ public class TestWerbservice extends TestCase {
 		return lcNewUserWebserviceDTO;
 	}
 
+	private ServerPublicKeyDTO getServerPublicKey()
+			throws MalformedURLException {
+		BasisInfoWebserviceService lcEndpointService = new BasisInfoWebserviceService(
+				new URL("http://localhost:8080/basisInfoWebservice"));
+
+		BasisInfoWebservice lcEndpoint = lcEndpointService
+				.getBasisInfoWebservicePort();
+
+		ServerPublicKeyDTO lcSPKDTO = lcEndpoint.getServerPublicKey();
+		return lcSPKDTO;
+	}
 }

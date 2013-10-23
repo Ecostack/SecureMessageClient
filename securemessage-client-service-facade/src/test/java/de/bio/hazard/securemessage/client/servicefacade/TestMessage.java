@@ -5,8 +5,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -28,15 +26,18 @@ import de.bio.hazard.securemessage.tecframework.encryption.asymmetric.Asymmetric
 import de.bio.hazard.securemessage.tecframework.encryption.asymmetric.AsymmetricKeygen;
 import de.bio.hazard.securemessage.tecframework.exception.MessageExceptionBiohazard;
 
-public class TestMessage extends TestCase {
+public class TestMessage {
 
-	private AuthenticationService authenticationService;
-	private BasisInfoService basisInfoService;
-	private UserService userService;
-	private MessageService messageService;
-	private AsymmetricKeygen asymmetricKeygen;
+	private static AuthenticationService authenticationService;
+	private static BasisInfoService basisInfoService;
+	@SuppressWarnings("unused")
+	private static UserService userService;
+	private static MessageService messageService;
+	private static AsymmetricKeygen asymmetricKeygen;
 
-	public void setUp() {
+	// @BeforeClass
+	public static void setUp() {
+		@SuppressWarnings("resource")
 		ApplicationContext lcContext = new ClassPathXmlApplicationContext(
 				"serviceFacade-applicationContext.xml");
 		authenticationService = lcContext.getBean(AuthenticationService.class);
@@ -46,6 +47,7 @@ public class TestMessage extends TestCase {
 		asymmetricKeygen = lcContext.getBean(AsymmetricKeygen.class);
 	}
 
+	// @Test
 	public void testMessage() throws NoSuchAlgorithmException,
 			NoSuchProviderException, MessageExceptionBiohazard, IOException {
 
